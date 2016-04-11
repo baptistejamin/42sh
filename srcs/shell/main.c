@@ -1,6 +1,19 @@
-#include <shell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
+/*   Updated: 2016/04/11 20:34:37 by bjamin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_sh	*t_sh_recover(void)
+#include <shell.h>
+#include <prompt.h>
+
+t_sh			*t_sh_recover(void)
 {
 	static t_sh	sh;
 
@@ -9,7 +22,7 @@ t_sh	*t_sh_recover(void)
 
 static	void	prepare_env(void)
 {
-	char 	*number;
+	char	*number;
 	t_sh	*sh;
 
 	sh = t_sh_recover();
@@ -27,16 +40,24 @@ static int		shell(void)
 	char	*input;
 	int		is_last_cmd_empty;
 
-	UNUSED(input);
 	is_last_cmd_empty = 0;
 	while (1)
 	{
-		
+		prompt_init();
+		if (!is_last_cmd_empty)
+			prompt_add_new();
+		prompt_display(1);
+		input = prompt_input();
+		if (input)
+		{
+			prompt_reset();
+			free(input);
+		}
 	}
 	return (0);
 }
 
-int  	main(int argc, char **argv, char **environ)
+int				main(int argc, char **argv, char **environ)
 {
 	t_sh	*sh;
 
