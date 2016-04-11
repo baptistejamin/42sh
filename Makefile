@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+         #
+#    By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/11 19:54:34 by ngrasset          #+#    #+#              #
-#    Updated: 2016/04/11 19:56:20 by ngrasset         ###   ########.fr        #
+#    Updated: 2016/04/11 20:03:00 by bjamin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ O_DIRS = $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
 O_FILES = $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
 
 FLAGS = -Wall -Wextra -Werror
-INCLUDES = -Iincludes -Ilibft/include
+INCLUDES = -Iincludes -Ilibft/includes
 LIB = -Llibft -lft -ltermcap
 
 all: $(NAME)
