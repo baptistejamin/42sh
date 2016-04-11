@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 19:27:26 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/11 20:17:36 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,29 @@ char	*env_get(t_list *list, char *var)
 		cur = cur->next;
 	}
 	return ("");
+}
+
+void	env_set(t_list **list, char *var, char *value)
+{
+	t_env	*env;
+	t_list	*cur;
+
+	cur = *list;
+	while (cur)
+	{
+		env = cur->content;
+		if (ft_strcmp(var, env->var) == 0)
+		{
+			env->value = value;
+			return ;
+		}
+		cur = cur->next;
+	}
+	env = malloc(sizeof(t_env));
+	env->var = var;
+	env->value = value;
+	ft_lstadd(list, ft_lstnew(env, sizeof(t_env)));
+	free(env);
 }
 
 void	env_show(t_list *list)

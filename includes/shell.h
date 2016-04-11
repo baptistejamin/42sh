@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:00:40 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/11 20:19:02 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ typedef struct		s_sh
 	int				prompt_position;
 	int				signals_disabled;
 }					t_sh;
+
+char				*env_get(t_list *list, char *var);
+void				env_set(t_list **list, char *var, char *value);
+void				env_show(t_list *list);
+void				env_to_list(t_list **list, char **environ);
+char				**env_from_list(t_list *list);
 
 #endif
