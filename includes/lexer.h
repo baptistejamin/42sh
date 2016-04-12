@@ -6,12 +6,13 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 16:35:50 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/12 16:36:57 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+# include <stdlib.h>
 # include <libft.h>
 
 typedef enum		e_token_type
@@ -37,7 +38,7 @@ typedef enum		e_token_type
 typedef struct		s_token_matcher
 {
 	t_token_type	type;
-	int				(*match_function)(char *)
+	int				(*match_function)(char *);
 
 }					t_token_matcher;
 

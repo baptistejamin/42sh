@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 16:28:04 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/12 16:37:53 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_token_matcher 		g_token_matcher[] = {
 	{REDIR_GET_INPUT,			&is_token_redir_get_input},
 	{PARENT_OPEN,				&is_token_parent_open},
 	{PARENT_CLOSE,				&is_token_parent_close},
-	{TOKEN_TYPE_END_LIST,		NULL};
-}
+	{TOKEN_TYPE_END_LIST,		NULL}
+};
 
 static int		is_token(char *str)
 {
@@ -59,7 +59,7 @@ static int 		read_token(t_list **token_list, char *str)
 				new_token(g_token_matcher[i].type, NULL));
 			return (length);
 		}
-		i++
+		i++;
 	}
 	return (0);
 }
