@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 17:51:15 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 00:11:16 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ t_token_matcher 		g_token_matcher[] = {
 	{TO_BACKGROUND, &is_token_to_background},
 	{PIPE, &is_token_pipe},
 	{QUOTE_BACK, &is_token_quote_back},
-//	{REDIR_APPEND_OUTPUT, &is_token_redir_append_output},
-//	{REDIR_TRUNCATE_OUTPUT, &is_token_redir_truncate_output},
-//	{REDIR_HEREDOC, &is_token_redir_heredoc},
-//	{REDIR_GET_INPUT, &is_token_redir_get_input},
 	{PARENT_OPEN, &is_token_parent_open},
 	{PARENT_CLOSE, &is_token_parent_close},
 	{TOKEN_TYPE_END_LIST, NULL}
