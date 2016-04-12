@@ -6,28 +6,26 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 16:37:53 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/12 17:51:15 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
 t_token_matcher 		g_token_matcher[] = {
-	{OR,						&is_token_and},
-	{AND,						&is_token_or},
-	{SEMI_COLON,				&is_token_semi_colon},
-	{TO_BACKGROUND,				&is_token_to_background},
-	{PIPE,						&is_token_pipe},
-	{QUOTE_SIMPLE,				&is_token_quote_simple},
-	{QUOTE_DOUBLE,				&is_token_quote_double},
-	{QUOTE_BACK,				&is_token_quote_back},
-	{REDIR_APPEND_OUTPUT,		&is_token_redir_append_output},
-	{REDIR_TRUNCATE_OUTPUT,		&is_token_redir_truncate_output},
-	{REDIR_HEREDOC,				&is_token_redir_heredoc},
-	{REDIR_GET_INPUT,			&is_token_redir_get_input},
-	{PARENT_OPEN,				&is_token_parent_open},
-	{PARENT_CLOSE,				&is_token_parent_close},
-	{TOKEN_TYPE_END_LIST,		NULL}
+	{OR, &is_token_or},
+	{AND, &is_token_and},
+	{SEMI_COLON, &is_token_semi_colon},
+	{TO_BACKGROUND, &is_token_to_background},
+	{PIPE, &is_token_pipe},
+	{QUOTE_BACK, &is_token_quote_back},
+//	{REDIR_APPEND_OUTPUT, &is_token_redir_append_output},
+//	{REDIR_TRUNCATE_OUTPUT, &is_token_redir_truncate_output},
+//	{REDIR_HEREDOC, &is_token_redir_heredoc},
+//	{REDIR_GET_INPUT, &is_token_redir_get_input},
+	{PARENT_OPEN, &is_token_parent_open},
+	{PARENT_CLOSE, &is_token_parent_close},
+	{TOKEN_TYPE_END_LIST, NULL}
 };
 
 static int		is_token(char *str)
@@ -64,7 +62,7 @@ static int 		read_token(t_list **token_list, char *str)
 	return (0);
 }
 
-static void		word_to_token(t_list **token_list, char *str, int length)
+static void		cmd_to_token(t_list **token_list, char *str, int length)
 {
 	char	*word;
 	int		i;
@@ -75,7 +73,7 @@ static void		word_to_token(t_list **token_list, char *str, int length)
 	while (ft_isspace(str[i]))
 		i++;
 	word = ft_strsub(str, i, length);
-	ft_lstadd_back(token_list, new_token(WORD, word));
+	ft_lstadd_back(token_list, new_token(CMD, word));
 }
 
 t_list			*input_to_token_list(char *input)
@@ -91,9 +89,11 @@ t_list			*input_to_token_list(char *input)
 			input++;
 		while (input[i] == '\\' && input[i + 1])
 			i += 2;
-		if (is_token(input + i) || ft_isspace(input[i]) || !input[i])
+		if (input[i] == '\'' || input[i] == '"')
+			i += lexer_skip_quotes(input + i);
+		if (is_token(input + i) || !input[i]) //|| ft_isspace(input[i]) || !input[i])
 		{
-			word_to_token(&token_list, input, i);
+			cmd_to_token(&token_list, input, i);
 			while (ft_isspace(input[i]))
 				i++;
 			i += read_token(&token_list, input + i);

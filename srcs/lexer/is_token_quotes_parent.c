@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:43:35 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 15:44:55 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/12 17:49:50 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 int		is_token_quote_back(char *line)
 {
 	if (*line == '`')
-		return (1);
-	return (0);
-}
-
-int		is_token_quote_simple(char *line)
-{
-	if (*line == '\'')
-		return (1);
-	return (0);
-}
-
-int		is_token_quote_double(char *line)
-{
-	if (*line == '"')
 		return (1);
 	return (0);
 }
