@@ -17,14 +17,6 @@ void print_token(t_token *t)
 		printf("PIPE\n");
 	if (t->type == QUOTE_BACK)
 		printf("QUOTE_BACK\n");
-	if (t->type == REDIR_APPEND_OUTPUT)
-		printf("REDIR_APPEND_OUTPUT\n");
-	if (t->type == REDIR_TRUNCATE_OUTPUT)
-		printf("REDIR_TRUNCATE_OUTPUT\n");
-	if (t->type == REDIR_HEREDOC)
-		printf("REDIR_HEREDOC\n");
-	if (t->type == REDIR_GET_INPUT)
-		printf("REDIR_GET_INPUT\n");
 	if (t->type == PARENT_OPEN)
 		printf("PARENT_OPEN\n");
 	if (t->type == PARENT_CLOSE)
@@ -43,7 +35,7 @@ int main(void) {
 	}
 
 	cmd = "echo \"Hello world \\\" still in \"&&echo|ls\"unterminated double quote\\";
-	printf("Testing: %s\n", cmd);
+	printf("\nTesting: %s\n", cmd);
 	token_list = input_to_token_list(cmd);
 	while (token_list) {
 		print_token(token_list->content);
@@ -51,7 +43,31 @@ int main(void) {
 	}
 
 	cmd = "echo 'Hello world &\\'&& wc > file.txt 'unterminated single quote";
-	printf("Testing: %s\n", cmd);
+	printf("\nTesting: %s\n", cmd);
+	token_list = input_to_token_list(cmd);
+	while (token_list) {
+		print_token(token_list->content);
+		token_list = token_list->next;
+	}
+
+	cmd = "e\"ch\"'o' \"inte\"rn\\\" quot\"es\"";
+	printf("\nTesting: %s\n", cmd);
+	token_list = input_to_token_list(cmd);
+	while (token_list) {
+		print_token(token_list->content);
+		token_list = token_list->next;
+	}
+
+	cmd = "\"echo all in unterminated double quote && wc > file.txt";
+	printf("\nTesting: %s\n", cmd);
+	token_list = input_to_token_list(cmd);
+	while (token_list) {
+		print_token(token_list->content);
+		token_list = token_list->next;
+	}
+
+	cmd = "'echo all in unterminated single quote && wc > file.txt";
+	printf("\nTesting: %s\n", cmd);
 	token_list = input_to_token_list(cmd);
 	while (token_list) {
 		print_token(token_list->content);

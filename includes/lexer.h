@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 17:58:05 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/12 18:54:35 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ typedef enum		e_token_type
 	TO_BACKGROUND,
 	PIPE,
 	QUOTE_BACK,
-	REDIR_APPEND_OUTPUT,
-	REDIR_TRUNCATE_OUTPUT,
-	REDIR_HEREDOC,
-	REDIR_GET_INPUT,
 	PARENT_OPEN,
 	PARENT_CLOSE,
 	TOKEN_TYPE_END_LIST
