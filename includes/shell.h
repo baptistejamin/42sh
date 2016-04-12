@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:36:51 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/12 16:14:00 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <libft.h>
 # include <prompt.h>
+# include <builtins.h>
 # include <unistd.h>
 # include <sys/stat.h>
 # include <stdlib.h>
