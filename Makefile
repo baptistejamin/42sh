@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+         #
+#    By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/11 19:54:34 by ngrasset          #+#    #+#              #
-#    Updated: 2016/04/11 20:03:00 by bjamin           ###   ########.fr        #
+#    Updated: 2016/04/12 18:16:43 by ngrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 42sh
 
 C_DIR =	srcs
-C_DIRS = $(shell find $(C_DIR) -type d -follow -print)
-C_FILES = $(shell find $(C_DIR) -type f -follow -print | grep "\.c")
+C_DIRS = $(shell find $(C_DIR) -type d -follow -print | grep -v '/tests_')
+C_FILES = $(shell find $(C_DIRS) -type f -follow -print | grep "\.c" | grep -v '/tests_')
 
 O_DIR =	.tmp/obj
 O_DIRS = $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
