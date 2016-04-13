@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_to_list.c                                    :+:      :+:    :+:   */
+/*   is_token_generic.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/12 16:02:34 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 21:49:10 by bjamin           ###   ########.fr       */
+/*   Created: 2016/04/12 15:43:35 by ngrasset          #+#    #+#             */
+/*   Updated: 2016/04/13 21:54:41 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-t_list		*new_token(t_token_type type, void *content)
+int		is_token(char *str)
 {
-	t_token		new_t;
+	int		i;
 
-	new_t.type = type;
-	new_t.content = content;
-	return (ft_lstnew(&new_t, sizeof(t_token)));
-}
-
-void		del_token(void *token_void, size_t size_content)
-{
-	t_token		*token;
-
-	if (!token_void)
-		return ;
-	if (size_content != sizeof(t_token))
-		return ;
-	token = (t_token *)token_void;
-	if (token->content)
-		free(token->content);
-	free(token);
+	i = 0;
+	while (g_token_matcher[i].type != TOKEN_TYPE_END_LIST)
+	{
+		if (g_token_matcher[i].match_function(str) != 0)
+			return (1);
+		i++;
+	}
+	return (0);
 }
