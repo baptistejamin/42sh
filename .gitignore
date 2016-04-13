@@ -33,3 +33,5 @@
 **/.DS_Store
 **/._*.*
 42sh
+**/test_lexer
+srcs/parser/tests_parser/test_parser
