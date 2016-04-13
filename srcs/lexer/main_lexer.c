@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 00:11:16 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:00:06 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-t_token_matcher 		g_token_matcher[] = {
+t_token_matcher		g_token_matcher[] = {
 	{OR, &is_token_or},
 	{AND, &is_token_and},
 	{SEMI_COLON, &is_token_semi_colon},
@@ -24,21 +24,7 @@ t_token_matcher 		g_token_matcher[] = {
 	{TOKEN_TYPE_END_LIST, NULL}
 };
 
-static int		is_token(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (g_token_matcher[i].type != TOKEN_TYPE_END_LIST)
-	{
-		if (g_token_matcher[i].match_function(str) != 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int 		read_token(t_list **token_list, char *str)
+static int		read_token(t_list **token_list, char *str)
 {
 	int		i;
 	int		length;
@@ -87,7 +73,7 @@ t_list			*input_to_token_list(char *input)
 			i += 2;
 		if (input[i] == '\'' || input[i] == '"')
 			i += lexer_skip_quotes(input + i);
-		if (is_token(input + i) || !input[i]) //|| ft_isspace(input[i]) || !input[i])
+		if (is_token(input + i) || !input[i])
 		{
 			cmd_to_token(&token_list, input, i);
 			while (ft_isspace(input[i]))

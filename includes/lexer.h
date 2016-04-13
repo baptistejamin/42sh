@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 19:29:35 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:00:31 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 # include <stdlib.h>
 # include <libft.h>
+
 
 typedef enum		e_token_type
 {
@@ -36,6 +37,8 @@ typedef struct		s_token_matcher
 
 }					t_token_matcher;
 
+extern t_token_matcher	g_token_matcher[];
+
 typedef struct		s_token
 {
 	t_token_type	type;
@@ -52,11 +55,10 @@ t_list				*input_to_token_list(char *input);
 t_list				*new_token(t_token_type type, void *content);
 void				del_token(void *token_void, size_t size_content);
 
-
-
 /*
 ** Token matching functions
 */
+int					is_token(char *str);
 int					is_token_or(char *line);
 int					is_token_and(char *line);
 int					is_token_semi_colon(char *line);
@@ -71,6 +73,5 @@ int					is_token_redir_get_input(char *line);
 int					is_token_parent_open(char *line);
 int					is_token_parent_close(char *line);
 int					lexer_skip_quotes(char *input);
-
 
 #endif
