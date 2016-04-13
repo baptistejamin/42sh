@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 22:00:06 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/13 22:19:40 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ t_list			*input_to_token_list(char *input)
 		if (is_token(input + i) || !input[i])
 		{
 			cmd_to_token(&token_list, input, i);
-			while (ft_isspace(input[i]))
-				i++;
 			i += read_token(&token_list, input + i);
 			input += i;
 			i = 0;
