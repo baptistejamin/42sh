@@ -44,6 +44,7 @@ int main(void)
 	char *cmd;
 	t_list *token_list;
 	t_list *job_list;
+	printf("SIZE OF t_io_channel : %lu\n", sizeof(t_io_channel));
 
 	cmd = "ls >> foo|wc < bar || cat -e 2>so_much_fun for you";
 	printf("\nTesting: %s\n", cmd);

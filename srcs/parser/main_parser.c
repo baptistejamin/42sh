@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:07 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 19:47:58 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:02:53 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ t_list					*parse_process(t_token *t)
 	if (!t || (t && t->type != CMD))
 		return (NULL);
 	ft_memset(&p, 0, sizeof(t_process));
-	p.stdio[0] = get_default_stdin();
-	p.stdio[1] = get_default_stdout();
-	p.stdio[2] = get_default_stderr();
+	p.stdio[1].fd = 1;
+	p.stdio[2].fd = 2;
 	p.argv = parse_cmd_argv(&p, t->content);
-	return (ft_lstnew(&p, sizeof(t_process))); //Leak memory from above strsplit
+	return (ft_lstnew(&p, sizeof(t_process)));
 }

@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 20:10:45 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:03:27 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,6 @@ int						parser_assert_cmd(t_token *t);
 
 char					**parse_cmd_argv(t_process *p, char *cmd);
 
-void					parse_io_channel(t_process *p, char *redir, char *target);
-t_io_channel			get_default_stdin(void);
-t_io_channel			get_default_stdout(void);
-t_io_channel			get_default_stderr(void);
+int						parse_io_channel(t_process *p, char *redir, char *target);
 
 #endif
