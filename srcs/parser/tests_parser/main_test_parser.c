@@ -7,7 +7,16 @@ void debug_put_process(t_process *p)
 	for (int i = 0; p->argv[i]; i++) {
 		printf("%s ", p->argv[i]);
 	}
-	printf("\nstdin: %d, stdout: %d, stderr: %d\n", p->stdio[0].fd, p->stdio[1].fd, p->stdio[2].fd);
+	printf("\nstdin: %d ", p->stdio[0].fd);
+	if (p->stdio[0].to_close)
+		printf("TO CLOSE  ");
+	printf("stdout: %d ", p->stdio[1].fd);
+	if (p->stdio[1].to_close)
+		printf("TO CLOSE  ");
+	printf("stderr: %d ", p->stdio[2].fd);
+	if (p->stdio[2].to_close)
+		printf("TO CLOSE  ");
+	printf("\n");
 }
 
 void debug_put_job(t_job *j)
@@ -36,7 +45,7 @@ int main(void)
 	t_list *token_list;
 	t_list *job_list;
 
-	cmd = "ls|wc";
+	cmd = "ls >> foo|wc < bar || cat -e 2>so_much_fun for you";
 	printf("\nTesting: %s\n", cmd);
 	token_list = input_to_token_list(cmd);
 	job_list = token_list_to_job_list(token_list);

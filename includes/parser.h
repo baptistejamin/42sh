@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 04:30:37 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 20:10:45 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <libft.h>
 # include <lexer.h>
 # include <termios.h>
+# include <fcntl.h>
 
 typedef enum			e_job_linker
 {
@@ -60,6 +61,9 @@ int 					parser_assert_linker(t_token *t);
 int						parser_assert_pipe(t_token *t);
 int						parser_assert_cmd(t_token *t);
 
+char					**parse_cmd_argv(t_process *p, char *cmd);
+
+void					parse_io_channel(t_process *p, char *redir, char *target);
 t_io_channel			get_default_stdin(void);
 t_io_channel			get_default_stdout(void);
 t_io_channel			get_default_stderr(void);

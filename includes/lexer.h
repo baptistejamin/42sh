@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/12 18:54:35 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 19:29:35 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					is_token_semi_colon(char *line);
 int					is_token_to_background(char *line);
 int					is_token_pipe(char *line);
 int					is_token_quote_back(char *line);
+int					is_token_redir(char *line);
 int					is_token_redir_append_output(char *line);
 int					is_token_redir_truncate_output(char *line);
 int					is_token_redir_heredoc(char *line);
