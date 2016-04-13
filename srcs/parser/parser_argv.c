@@ -6,12 +6,12 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 19:48:25 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:10:56 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-#include <stdio.h>
+
 static size_t	count_args(const char *s)
 {
 	size_t	words;
@@ -62,9 +62,9 @@ char			**parse_cmd_argv(t_process *p, char *cmd)
 			j += 2;
 		}
 		else
-			argv[i++] = ft_strdup(split[j++]);
+			argv[i++] = ft_strdup(split[j++]); //Strdup is too damn simple, need to escape quotes
 	}
 	argv[i] = NULL;
-	//ft_delstrtab(split);
+	ft_free_tab(split);
 	return (argv);
 }

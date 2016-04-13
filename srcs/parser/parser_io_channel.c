@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 04:10:04 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 21:46:20 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/13 22:14:57 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int			get_redir_channel(char *redir)
 }
 //DOESNT WORK, DONT HANDLE WHERE REDIRECTION SYMBOL '>' AND TARGET ARE
 //NOT SEPERATED BY A SPACE (LIKE ls>foo)
-void				parse_io_channel(t_process *p, char *redir, char *target)
+int					parse_io_channel(t_process *p, char *redir, char *target)
 {
 	int		fd;
 	int		from;
@@ -56,31 +56,5 @@ void				parse_io_channel(t_process *p, char *redir, char *target)
 		p->stdio[0].fd = 8; //TODO
 	if (is_token_redir_get_input(redir))
 		p->stdio[0].fd = 9; //TODO
-}
-
-t_io_channel		get_default_stdin(void)
-{
-	t_io_channel	c;
-
-	c.fd = 0;
-	c.to_close = 0;
-	return (c);
-}
-
-t_io_channel		get_default_stdout(void)
-{
-	t_io_channel	c;
-
-	c.fd = 1;
-	c.to_close = 0;
-	return (c);
-}
-
-t_io_channel		get_default_stderr(void)
-{
-	t_io_channel	c;
-
-	c.fd = 2;
-	c.to_close = 0;
-	return (c);
+	return (0);
 }
