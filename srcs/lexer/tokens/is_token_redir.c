@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:43:57 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 19:38:16 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/14 18:12:52 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,18 @@ int		is_token_redir_append_output(char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	if (line[i] == '>' && line[i + 1] == '>')
-		return (i + 2);
+	{
+		i += 2;
+		if (line[i] == '&' && line[i + 1] == '-')
+			return (i + 2);
+		if (line[i] == '&')
+		{
+			i++;
+			while (ft_isdigit(line[i]))
+				i++;
+		}
+		return (i);
+	}
 	return (0);
 }
 
@@ -47,7 +58,18 @@ int		is_token_redir_truncate_output(char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	if (line[i] == '>')
-		return (i + 1);
+	{
+		i++;
+		if (line[i] == '&' && line[i + 1] == '-')
+			return (i + 2);
+		if (line[i] == '&')
+		{
+			i++;
+			while (ft_isdigit(line[i]))
+				i++;
+		}
+		return (i);
+	}
 	return (0);
 }
 
@@ -59,7 +81,18 @@ int		is_token_redir_heredoc(char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	if (line[i] == '<' && line[i + 1] == '<')
-		return (i + 2);
+	{
+		i += 2;
+		if (line[i] == '&' && line[i + 1] == '-')
+			return (i + 2);
+		if (line[i] == '&')
+		{
+			i++;
+			while (ft_isdigit(line[i]))
+				i++;
+		}
+		return (i);
+	}
 	return (0);
 }
 
@@ -71,6 +104,17 @@ int		is_token_redir_get_input(char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	if (line[i] == '<')
-		return (i + 1);
+	{
+		i++;
+		if (line[i] == '&' && line[i + 1] == '-')
+			return (i + 2);
+		if (line[i] == '&')
+		{
+			i++;
+			while (ft_isdigit(line[i]))
+				i++;
+		}
+		return (i);
+	}
 	return (0);
 }

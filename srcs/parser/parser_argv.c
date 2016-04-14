@@ -6,12 +6,12 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 22:10:56 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/14 18:11:22 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-
+#include <stdio.h>
 static size_t	count_args(const char *s)
 {
 	size_t	words;
@@ -42,29 +42,40 @@ static char		*clear_str_space(char *s)
 	return (res);
 }
 
+static char		*get_new_arg(char *arg)
+{
+	char		*res;
+
+	res = ft_strdup(arg);
+	return (res); //need to escape quotes
+}
+
 char			**parse_cmd_argv(t_process *p, char *cmd)
 {
 	char	**argv;
 	char	**split;
+	char	**start_split;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	if (!(argv = malloc(sizeof(char *) * count_args(clear_str_space(cmd)))) ||
+	if (!(argv = malloc(sizeof(char *) * count_args(clear_str_space(cmd)) + 1)) ||
 		!(split = ft_strsplit(cmd, ' ')))
 		return (NULL);
-	while (split[j])
+	start_split = split;
+	while (*split)
 	{
-		if (is_token_redir(split[j]) && split[j + 1])
+		if (is_token_redir(*split))
 		{
-			parse_io_channel(p, split[j], split[j + 1]);
-			j += 2;
+			printf("ping\n");
+			split += parse_io_channel(p, split);
 		}
 		else
-			argv[i++] = ft_strdup(split[j++]); //Strdup is too damn simple, need to escape quotes
+		{
+			argv[i++] = get_new_arg(*split);
+			split++;
+		}
 	}
 	argv[i] = NULL;
-	ft_free_tab(split);
+	ft_free_tab(start_split);
 	return (argv);
 }

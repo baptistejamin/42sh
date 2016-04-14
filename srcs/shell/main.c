@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:34:37 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/14 18:20:53 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
-
+#include <stdio.h>
 t_sh			*t_sh_recover(void)
 {
 	static t_sh	sh;
@@ -51,6 +51,7 @@ static int		shell(void)
 		if (input)
 		{
 			prompt_reset();
+			printf("INPUT:%s||\n", input);
 			free(input);
 		}
 	}
