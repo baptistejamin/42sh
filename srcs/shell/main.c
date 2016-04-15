@@ -6,12 +6,13 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:34:37 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/15 17:49:37 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
+#include <parser.h>
 
 t_sh			*t_sh_recover(void)
 {
@@ -39,6 +40,8 @@ static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
+	t_list	*token_list;
+	t_list	*job_list;
 
 	is_last_cmd_empty = 0;
 	while (1)
@@ -50,6 +53,8 @@ static int		shell(void)
 		input = prompt_input();
 		if (input)
 		{
+			token_list = input_to_token_list(input);
+			job_list = token_list_to_job_list(token_list);
 			prompt_reset();
 			free(input);
 		}
