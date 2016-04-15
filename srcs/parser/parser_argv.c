@@ -6,12 +6,12 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/14 18:11:22 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/15 17:49:24 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-#include <stdio.h>
+
 static size_t	count_args(const char *s)
 {
 	size_t	words;
@@ -65,10 +65,7 @@ char			**parse_cmd_argv(t_process *p, char *cmd)
 	while (*split)
 	{
 		if (is_token_redir(*split))
-		{
-			printf("ping\n");
 			split += parse_io_channel(p, split);
-		}
 		else
 		{
 			argv[i++] = get_new_arg(*split);

@@ -6,13 +6,17 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/14 18:20:53 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/15 20:04:21 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
 #include <stdio.h>
+#include <lexer.h>
+#include <parser.h>
+#include <executor.h>
+
 t_sh			*t_sh_recover(void)
 {
 	static t_sh	sh;
@@ -40,6 +44,9 @@ static int		shell(void)
 	char	*input;
 	int		is_last_cmd_empty;
 
+	t_list *token_list;
+	t_list *job_list;
+
 	is_last_cmd_empty = 0;
 	while (1)
 	{
@@ -51,7 +58,14 @@ static int		shell(void)
 		if (input)
 		{
 			prompt_reset();
-			printf("INPUT:%s||\n", input);
+			if (ft_strcmp("exit", input) == 0)
+				exit(0); //TMP
+			token_list = input_to_token_list(input);
+			job_list = token_list_to_job_list(token_list);
+			while (job_list) {
+				launch_job(job_list->content, 1);
+				job_list = job_list->next;
+			}
 			free(input);
 		}
 	}
@@ -65,6 +79,8 @@ int				main(int argc, char **argv, char **environ)
 	UNUSED(argv);
 	sh = t_sh_recover();
 	sh->tty = open("/dev/tty", O_RDWR);
+	sh->pgid = getpgrp();
+	ignore_major_signals();
 	if (argc > 1)
 	{
 		ft_putendl_fd("42sh cannot execute commands", 2);
