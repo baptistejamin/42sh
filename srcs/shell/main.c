@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/15 20:07:18 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/16 00:17:40 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ static int		shell(void)
 	t_list	*token_list;
 	t_list	*job_list;
 
-	t_list *token_list;
-	t_list *job_list;
-
 	is_last_cmd_empty = 0;
 	while (1)
 	{
@@ -59,6 +56,7 @@ static int		shell(void)
 		input = prompt_input();
 		if (input)
 		{
+			prompt_reset();
 			if (ft_strcmp("exit", input) == 0)
 				exit(0); //TMP
 			token_list = input_to_token_list(input);

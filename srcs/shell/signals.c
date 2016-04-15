@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:32:25 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/15 18:34:24 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/16 00:01:44 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ignore_major_signals(void)
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTTIN, SIG_IGN);
 	signal(SIGTTOU, SIG_IGN);
-	signal(SIGCHLD, SIG_IGN);
 }
 
 void	reset_major_signals(void)
@@ -29,5 +28,4 @@ void	reset_major_signals(void)
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
-	signal(SIGCHLD, SIG_DFL);
 }

@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/15 20:03:05 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/16 00:20:31 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include <executor.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/errno.h>
 void	launch_job(t_job *j, int foreground)
 {
 	t_list		*process_list;
 	t_process 	*process;
 	int			infile;
+	int			outfile;
 	int			pipe_fd[2];
 	pid_t		child_pid;
 
@@ -27,22 +29,30 @@ void	launch_job(t_job *j, int foreground)
 	while (process_list)
 	{
 		process = process_list->content;
-		if (infile != 0)
-		{
-			process->stdio[0].fd = infile;
-			process->stdio[0].to_close = 1;
-		}
 		if (process_list->next)
 		{
 			pipe(pipe_fd); //Handle pipe errors?
-			process->stdio[1].fd = pipe_fd[1];
-			process->stdio[1].to_close = 1;
-			infile = pipe_fd[0];
+			outfile = pipe_fd[1];
 		}
+		else
+			outfile = 1;
 		if ((child_pid = fork()) == 0) //Handle fork errors?
-			launch_process(process, foreground);
+		{
+			process->stdio[0].fd = infile;
+			process->stdio[1].fd = outfile;
+			launch_process(process, j->pgid, foreground);
+		}
 		process->pid = child_pid;
+		if (!j->pgid)
+			j->pgid = child_pid;
+		setpgid(child_pid, j->pgid);
 		process_list = process_list->next;
+
+		if (infile != 0)
+			close (infile);
+		if (outfile != 1)
+			close (outfile);
+		infile = pipe_fd[0];
 	}
 	if (foreground)
 		put_job_in_foreground(j);
@@ -72,15 +82,19 @@ void	wait_for_job(t_job *j)
 	int		status;
 	pid_t	pid;
 
+	status = 0;
+	pid = 0;
 	while (!job_is_completed(j))
 	{
-		pid = waitpid(0, &status, WUNTRACED);
-		printf("waitpid returned pid %d\n", pid);
+		pid = waitpid(- j->pgid, &status, WUNTRACED);
 		update_process_status(j, pid, status);
 		if (pid == -1)
+		{
+			printf("pid == -1\n");
 			break ;		//Hacky, this should not happend all the time :(
+		}
+		status = 0;
 	}
-	printf("out of while loop\n");
 }
 
 int		job_is_completed(t_job *j)
