@@ -77,7 +77,7 @@ int main(void) {
 	}
 	ft_lstdel(&copy, &del_token);
 
-	cmd = "'echo all in unterminated single quote && wc > file.txt";
+	cmd = "'echo all in unterminated single quote' && wc >&- file.txt";
 	printf("\nTesting: %s\n", cmd);
 	token_list = input_to_token_list(cmd);
 	copy = token_list;

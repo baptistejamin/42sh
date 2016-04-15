@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 22:00:31 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/14 17:03:29 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_token
 	t_token_type	type;
 	void			*content;
 }					t_token;
+
 /*
 ** Main lexer
 */
