@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/17 17:17:03 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/18 00:44:55 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void		launch_process_builtin(t_process *p)
 	t_sh	*shell;
 
 	shell = t_sh_recover();
-	dup2(p->stdio[0].fd, 0);
-	dup2(p->stdio[1].fd, 1);
-	dup2(p->stdio[2].fd, 2);
 	p->status = boot_builtin(shell->env_list, p->argv);
 	p->completed = 1;
 }
