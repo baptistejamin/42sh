@@ -62,6 +62,7 @@ static int		shell(void)
 			token_list = input_to_token_list(input);
 			job_list = token_list_to_job_list(token_list);
 			while (job_list) {
+				prepare_job(job_list->content);
 				launch_job(job_list->content, 1);
 				job_list = job_list->next;
 			}

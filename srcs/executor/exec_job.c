@@ -36,7 +36,13 @@ void	launch_job(t_job *j, int foreground)
 		}
 		else
 			outfile = 1;
-		if ((child_pid = fork()) == 0) //Handle fork errors?
+		if (is_builtin(process->argv))
+		{
+			process->stdio[0].fd = infile;
+			process->stdio[1].fd = outfile;
+			launch_process_builtin(process);
+		}
+		else if ((child_pid = fork()) == 0) //Handle fork errors?
 		{
 			process->stdio[0].fd = infile;
 			process->stdio[1].fd = outfile;
@@ -55,23 +61,26 @@ void	launch_job(t_job *j, int foreground)
 		infile = pipe_fd[0];
 	}
 	if (foreground)
-		put_job_in_foreground(j);
+		put_job_in_foreground(j, 0);
 	else
-		put_job_in_background(j);
+		put_job_in_background(j, 0);
 }
 
-void	put_job_in_background(t_job *j)
+void	put_job_in_background(t_job *j, int cont)
 {
 	(void)j;
+	(void)cont;
 	//Need to log new background task
 }
 
-void	put_job_in_foreground(t_job *j)
+void	put_job_in_foreground(t_job *j, int cont)
 {
 	t_sh	*shell;
 
 	shell = t_sh_recover();
 	tcsetpgrp(0, j->pgid);
+	if (cont)
+		kill (- j->pgid, SIGCONT);
 	wait_for_job(j);
 	tcsetpgrp(0, shell->pgid);
 	//Maybe restore default termcaps ?
@@ -84,7 +93,7 @@ void	wait_for_job(t_job *j)
 
 	status = 0;
 	pid = 0;
-	while (!job_is_completed(j))
+	while (!job_is_completed(j) )
 	{
 		pid = waitpid(- j->pgid, &status, WUNTRACED);
 		update_process_status(j, pid, status);

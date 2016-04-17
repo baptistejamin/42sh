@@ -3,17 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/16 00:21:25 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/17 17:17:03 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <executor.h>
+#include <builtins.h>
 #include <stdio.h>
 #include <sys/errno.h>
+void		launch_process_builtin(t_process *p)
+{
+	t_sh	*shell;
+
+	shell = t_sh_recover();
+	dup2(p->stdio[0].fd, 0);
+	dup2(p->stdio[1].fd, 1);
+	dup2(p->stdio[2].fd, 2);
+	p->status = boot_builtin(shell->env_list, p->argv);
+	p->completed = 1;
+}
+
 void		launch_process(t_process *p, pid_t pgid, int foreground)
 {
 	char	**env;
@@ -35,7 +48,8 @@ void		launch_process(t_process *p, pid_t pgid, int foreground)
 	dup2(p->stdio[1].fd, 1);
 	dup2(p->stdio[2].fd, 2);
 	execve(p->argv[0], p->argv, env);
-	ft_putendl("execve error\n"); // PIMP MY ERROR MESSAGE
+	ft_putstr("42sh: command not found: "); // PIMP MY ERROR MESSAGE
+	ft_putendl(p->argv[0]);
 	exit(1);
 }
 
