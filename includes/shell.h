@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 18:16:26 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:44:23 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_sh
 	t_termios		default_term;
 	t_winsize		win;
 	t_list			*env_list;
+	t_list			*vars_list;
 	int				last_res;
 	t_list			*history;
 	int				prompt_position;

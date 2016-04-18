@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 18:17:08 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:43:46 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int				main(int argc, char **argv, char **environ)
 
 	UNUSED(argv);
 	sh = t_sh_recover();
+	sh->vars_list = NULL;
 	sh->tty = open("/dev/tty", O_RDWR);
 	sh->pgid = getpgrp();
 	sh->jobs = NULL;

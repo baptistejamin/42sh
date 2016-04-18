@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 19:15:43 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:53:22 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static t_builtin	*builtins_get(void)
 		{"setenv", builtin_setenv},
 		{"unsetenv", builtin_unsetenv},
 		{"help", builtin_help},
+		{"unset", builtin_unset},
+		{"export", builtin_export},
 		{"jobs", builtin_jobs},
 		{NULL, builtin_exit}
 	};
