@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 04:10:04 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 21:36:52 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:52:22 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static int	parse_heredoc_redir(t_process *p, int channel, char *target)
 		if (get_next_line(0, &line) < 1)
 			break ;
 		if (ft_strcmp(line, target))
+		{
 			write(pipe_fd[1], line, ft_strlen(line));
+			write(pipe_fd[1], "\n", 1);
+		}
 	}
 	p->stdio[channel].fd = pipe_fd[0];
 	p->stdio[channel].to_close = 1;
@@ -59,10 +62,16 @@ static int	parse_heredoc_redir(t_process *p, int channel, char *target)
 
 static int	parse_input_redir(t_process *p, int channel, char *target)
 {
-	(void)p;
-	(void)channel;
-	(void)target;
-	//p->stdio[0].fd = -1;
+	int		fd;
+
+	if ((fd = open(target, O_RDONLY)) == -1)
+	{
+		ft_putstr("42sh: No such file: ");
+		ft_putendl(target);
+		return (0);
+	}
+	p->stdio[channel].fd = fd;
+	p->stdio[channel].to_close = 1;
 	return (0);
 }
 
