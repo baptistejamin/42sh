@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/15 17:49:24 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:54:26 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,29 @@ static char		*get_new_arg(char *arg)
 
 	res = ft_strdup(arg);
 	return (res); //need to escape quotes
+}
+
+char			*construct_job_command(t_list *process_list)
+{
+	char		*cmd;
+	t_process	*p;
+	int			i;
+
+	cmd = NULL;
+	while (process_list)
+	{
+		p = process_list->content;
+		i = 0;
+		while (p->argv && p->argv[i])
+		{
+			cmd = ft_strfjoin(cmd, p->argv[i++]);
+			cmd = ft_strfjoin(cmd, " ");
+		}
+		if (process_list->next)
+			cmd = ft_strfjoin(cmd, "| ");
+		process_list = process_list->next;
+	}
+	return (cmd);
 }
 
 char			**parse_cmd_argv(t_process *p, char *cmd)
