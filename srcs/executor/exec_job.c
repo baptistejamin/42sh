@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:26:26 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 20:23:36 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void			exec_job_list(t_list *job_list)
 			launch_job(job_list->content, 1);
 		else
 			launch_job(job_list->content, 0);
-		if (is_job_success(j) && j->linker == LINK_OR)
+		if (!job_is_completed(j) && job_is_stopped(j) &&
+			j->linker != LINK_TO_BACKGROUND)
+			put_job_in_background(j, 0);
+		else if (is_job_success(j) && j->linker == LINK_OR)
 		{
 			while (job_list->next && ((t_job *)job_list->content)->linker == LINK_OR)
 				job_list = job_list->next;
