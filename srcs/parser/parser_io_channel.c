@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 04:10:04 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:52:22 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:55:29 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ static int	parse_heredoc_redir(t_process *p, int channel, char *target)
 		ft_putstr("heredoc>> ");
 		if (get_next_line(0, &line) < 1)
 			break ;
-		if (ft_strcmp(line, target))
+		if (line && ft_strcmp(line, target))
 		{
 			write(pipe_fd[1], line, ft_strlen(line));
 			write(pipe_fd[1], "\n", 1);
+			free(line);
 		}
 	}
 	p->stdio[channel].fd = pipe_fd[0];
