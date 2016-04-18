@@ -56,7 +56,7 @@ int main(void)
 		job_list = job_list->next;
 	}
 
-	cmd = "ls > wc 'yo yo yo'-l -L -lL|wc|wc|   wc&&false|cat -e      		| wc       ||        true; ;yes";	
+	cmd = "ls > wc 'yo yo yo'-l -L -lL|wc|wc|   wc&&false|cat -e      		| wc       ||        true; ;yes << EOF";
 	printf("\nTesting: %s\n", cmd);
 	token_list = input_to_token_list(cmd);
 	job_list = token_list_to_job_list(token_list);
