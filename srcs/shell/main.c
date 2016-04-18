@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 12:01:55 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 17:56:09 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static int		shell(void)
 			prompt_reset();
 			if (ft_strcmp("exit", input) == 0)
 				exit(0); //TMP
+			update_job_status();
 			token_list = input_to_token_list(input);
 			job_list = token_list_to_job_list(token_list);
 			exec_job_list(job_list);
@@ -76,6 +77,7 @@ int				main(int argc, char **argv, char **environ)
 	sh = t_sh_recover();
 	sh->tty = open("/dev/tty", O_RDWR);
 	sh->pgid = getpgrp();
+	sh->jobs = NULL;
 	ignore_major_signals();
 	if (argc > 1)
 	{
