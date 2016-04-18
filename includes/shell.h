@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:27:30 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 18:16:26 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void				env_set(t_list **list, char *var, char *value);
 void				env_show(t_list *list);
 void				env_to_list(t_list **list, char **environ);
 char				**env_from_list(t_list *list);
+void				shell_exit(void);
 
 /*
 ** SIGNALS

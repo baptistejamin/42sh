@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/12 16:26:50 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:27:01 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ int			builtin_env(t_list *environ, char **cmds)
 	if (cmd_index != -1 && !cmds[cmd_index])
 		env_show(new_env);
 	else if (cmd_index != -1)
-	{
-		//Todo: to replace by the executor
-		//shell_boot(sh, new_env, &cmds[cmd_index]);
-	}
+		env_boot(new_env, &cmds[cmd_index]);
 	if (new_env)
 		ft_lstdel(&new_env, &builtin_unsetenv_free);
 	return (0);

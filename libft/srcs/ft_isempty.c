@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   misc.c                                             :+:      :+:    :+:   */
+/*   ft_isempty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:06:59 by bjamin           ###   ########.fr       */
+/*   Created: 2015/11/26 14:48:35 by bjamin            #+#    #+#             */
+/*   Updated: 2016/04/18 15:52:45 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <prompt.h>
+#include <libft.h>
 
-enum e_prompt_status	prompt_fire_cmd(char *buf)
+int	ft_isempty(const char *str)
 {
-	if (!ENTER)
-		return (TRYING);
-	prompt_display(0);
-	tputs(tgetstr("do", NULL), 0, tputs_putchar);
-	return (FIRE_CMD);
-}
+	int	i;
 
-enum e_prompt_status	prompt_shell_quit(char *buf)
-{
-	if (!QUIT)
-		return (TRYING);
-	shell_exit();
-	return (READING);
-}
-
-void					free_char(void *content, size_t size)
-{
-	UNUSED(size);
-	free(content);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -6,9 +6,10 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 17:56:09 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 18:17:08 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <shell.h>
 #include <prompt.h>
@@ -54,11 +55,10 @@ static int		shell(void)
 			prompt_add_new();
 		prompt_display(1);
 		input = prompt_input();
+		is_last_cmd_empty = ft_isempty(input);
 		if (input)
 		{
 			prompt_reset();
-			if (ft_strcmp("exit", input) == 0)
-				exit(0); //TMP
 			update_job_status();
 			token_list = input_to_token_list(input);
 			job_list = token_list_to_job_list(token_list);

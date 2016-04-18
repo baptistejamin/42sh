@@ -6,7 +6,7 @@
 #    By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 12:39:51 by bjamin            #+#    #+#              #
-#    Updated: 2016/03/14 19:01:30 by bjamin           ###   ########.fr        #
+#    Updated: 2016/04/18 15:50:38 by bjamin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ _SRC			= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 					ft_lstiter_if.c ft_lstsort.c ft_lstrev.c ft_free_tab.c \
 					ft_is_in.c ft_lstdel_at.c ft_lstcount.c ft_lstcpy.c \
 					ft_lstadd_back.c ft_lstget_at.c ft_lstadd_at.c \
-					ft_isspace.c ft_strndup.c ft_str_alnum.c
+					ft_isspace.c ft_strndup.c ft_str_alnum.c ft_isempty.c
 
 SRC				= $(addprefix srcs/,$(_SRC))
 INCLUDES		= ./includes/

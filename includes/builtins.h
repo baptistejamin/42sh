@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/12 16:27:39 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:33:03 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,11 @@ char				*builtin_cd_assert_multiple_args(
 							char **cmds, t_generic_options *options);
 char				*builtin_cd_assert_home(t_list *environ);
 int					builtin_cd_error(int type, char *path);
+int					env_boot(t_list *environ, char **cmds);
+int					env_launch_cmd(t_list *environ, char *cmd,
+					char **args);
+void				errors_is_directory(char *cmd);
+void				errors_not_found(char *cmd);
+void				errors_no_file_directory(char *cmd);
 
 #endif

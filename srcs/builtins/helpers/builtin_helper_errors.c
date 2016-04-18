@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   misc.c                                             :+:      :+:    :+:   */
+/*   builtin_helper_errors.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:06:59 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:31:14 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
-#include <prompt.h>
 
-enum e_prompt_status	prompt_fire_cmd(char *buf)
+void	errors_is_directory(char *cmd)
 {
-	if (!ENTER)
-		return (TRYING);
-	prompt_display(0);
-	tputs(tgetstr("do", NULL), 0, tputs_putchar);
-	return (FIRE_CMD);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": is a directory\n", 2);
 }
 
-enum e_prompt_status	prompt_shell_quit(char *buf)
+void	errors_not_found(char *cmd)
 {
-	if (!QUIT)
-		return (TRYING);
-	shell_exit();
-	return (READING);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
-void					free_char(void *content, size_t size)
+void	errors_no_file_directory(char *cmd)
 {
-	UNUSED(size);
-	free(content);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 }
