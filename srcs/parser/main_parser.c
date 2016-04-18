@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:07 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 22:02:53 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:45:16 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_list					*parse_job(t_list *token_split)
 		token_split = token_split->next;
 	}
 	job.linker = get_token_linker(token_split);
+	job.command = construct_job_command(job.process_list);
 	return (ft_lstnew(&job, sizeof(t_job)));
 }
 

@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 20:04:24 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 21:31:50 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_builtin	*builtins_get(void)
 		{"export", builtin_export},
 		{"read", builtin_read},
 		{"jobs", builtin_jobs},
+		{"fg", builtin_jobs},
 		{NULL, builtin_exit}
 	};
 

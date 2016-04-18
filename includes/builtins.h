@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 20:04:05 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 21:31:33 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int					builtin_read(t_list *environ, char **cmds);
 int					builtin_setenv(t_list *environ, char **cmds);
 int					builtin_unsetenv(t_list *environ, char **cmds);
 void				builtin_unsetenv_free(void *content, size_t content_size);
+int					builtin_fg(t_list *environ, char **cmds);
 int					is_builtin(char **cmds);
 int					boot_builtin(t_list *environ, char **cmds);
 int					boot_cmd(t_list *environ, char **cmds);

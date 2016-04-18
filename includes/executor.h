@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:26 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 17:51:34 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 20:26:14 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				is_job_success(t_job *j);
 t_job			*find_job_by_gpid(t_list *job_list, pid_t gpid);
 t_job			*find_job_by_pid(t_list *job_list, pid_t pid);
 int				find_job_index(pid_t gpid);
+t_job			*find_job_by_index(int index);
 
 int				update_process_status_by_pid(t_list *process_list,
 					pid_t pid, int status);
@@ -43,4 +44,5 @@ void			update_job_status_by_pid(t_list *job_list,
 					pid_t pid, int status);
 void			update_job_status(void);
 void			put_job_info(t_job *j, int index);
+
 #endif
