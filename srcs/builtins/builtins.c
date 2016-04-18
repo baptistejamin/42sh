@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 19:35:47 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:43:35 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static t_builtin	*builtins_get(void)
 		{"unsetenv", builtin_unsetenv},
 		{"help", builtin_help},
 		{"export", builtin_export},
-		{NULL, builtin_exit},
+		{"jobs", builtin_jobs},
+		{NULL, builtin_exit}
 	};
 
 	return ((void *)f);

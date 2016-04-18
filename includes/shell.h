@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:57:00 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:44:23 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_sh
 	t_prompt		*c_prompt;
 	int				signals_disabled;
 	pid_t			pgid;
+	t_list			*jobs;
 }					t_sh;
 
 t_sh				*t_sh_recover(void);

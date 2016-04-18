@@ -6,9 +6,10 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:57:22 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:43:46 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <shell.h>
 #include <prompt.h>
@@ -58,14 +59,9 @@ static int		shell(void)
 		if (input)
 		{
 			prompt_reset();
+			update_job_status();
 			token_list = input_to_token_list(input);
 			job_list = token_list_to_job_list(token_list);
-			while (job_list)
-			{
-				prepare_job(job_list->content);
-				launch_job(job_list->content, 1);
-				job_list = job_list->next;
-			}
 			exec_job_list(job_list);
 			free(input);
 		}
@@ -82,6 +78,7 @@ int				main(int argc, char **argv, char **environ)
 	sh->vars_list = NULL;
 	sh->tty = open("/dev/tty", O_RDWR);
 	sh->pgid = getpgrp();
+	sh->jobs = NULL;
 	ignore_major_signals();
 	if (argc > 1)
 	{

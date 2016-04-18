@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/14 18:15:58 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 16:54:11 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,8 @@ int						aggreagate_fd(t_process *p, char *redir);
 int						get_redir_channel(char *redir);
 int						count_target_length(t_process *p, char **sp,
 							char sy, int (*p_fn)(t_process *, int, char *));
+
+void					del_job(void *job_raw, size_t job_size);
+void					del_process(void *raw_process, size_t process_size);
 
 #endif

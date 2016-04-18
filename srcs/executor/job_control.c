@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 15:52:38 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 18:09:31 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 void	put_job_in_background(t_job *j, int cont)
 {
-	(void)j;
-	(void)cont;
-	//Need to log new background task
+	t_sh	*shell;
+
+	shell = t_sh_recover();
+	if (cont)
+		kill (- j->pgid, SIGCONT);
+	ft_lstadd_back(&(shell->jobs), ft_lstnew(j, sizeof(t_job)));
+	put_job_info(j, find_job_index(j->pgid));
 }
 
 void	put_job_in_foreground(t_job *j, int cont)

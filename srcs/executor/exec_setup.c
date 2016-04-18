@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 16:54:22 by nathan            #+#    #+#             */
-/*   Updated: 2016/04/17 17:15:41 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:21:27 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <executor.h>
 #include <dirent.h>
+#include <builtins.h>
 
 static char		*path_join(char *s1, char *s2)
 {
@@ -57,7 +58,7 @@ static void		find_path_binary(char **av, char *path)
 	char	*bin_path;
 	int		i;
 
-	if (!path)
+	if (!path || is_builtin(av))
 		return ;
 	if (!(folders = ft_strsplit(path, ':')))
 		return ;

@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 12:15:53 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:26:26 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void			launch_job(t_job *j, int foreground)
 	int			pipe_fd[2];
 	pid_t		child_pid;
 
-	infile = 0;
 	process_list = j->process_list;
+	infile = 0;
 	while (process_list)
 	{
 		process = process_list->content;
@@ -69,8 +69,10 @@ void			launch_job(t_job *j, int foreground)
 		}
 		else if ((child_pid = fork()) == 0) //Handle fork errors?
 		{
-			process->stdio[0].fd = infile;
-			process->stdio[1].fd = outfile;
+			if (infile != 0)
+				process->stdio[0].fd = infile;
+			if (outfile != 1)
+				process->stdio[1].fd = outfile;
 			launch_process(process, j->pgid, foreground);
 		}
 		process->pid = child_pid;
