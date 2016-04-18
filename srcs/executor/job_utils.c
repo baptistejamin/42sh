@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 17:38:10 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 17:54:44 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 21:54:14 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,23 @@ int			find_job_index(pid_t pgid)
 		i++;
 	}
 	return (0);
+}
+
+t_job		*find_job_by_index(int index)
+{
+	t_sh	*shell;
+	t_list	*job_list;
+	int		i;
+
+	shell = t_sh_recover();
+	job_list = shell->jobs;
+	i = 1;
+	while (job_list)
+	{
+		if (i == index)
+			return (job_list->content);
+		job_list = job_list->next;
+		i++;
+	}
+	return (NULL);
 }

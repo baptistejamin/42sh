@@ -6,13 +6,13 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 18:09:31 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:18:57 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
 #include <shell.h>
-
+#include <stdio.h>
 void	put_job_in_background(t_job *j, int cont)
 {
 	t_sh	*shell;
@@ -29,7 +29,8 @@ void	put_job_in_foreground(t_job *j, int cont)
 	t_sh	*shell;
 
 	shell = t_sh_recover();
-	tcsetpgrp(0, j->pgid);
+	if (j->pgid > 0)
+		tcsetpgrp(0, j->pgid);
 	if (cont)
 		kill (- j->pgid, SIGCONT);
 	wait_for_job(j);

@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 20:23:36 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 21:59:36 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void			launch_job(t_job *j, int foreground)
 
 	process_list = j->process_list;
 	infile = 0;
+	child_pid = 0;
 	while (process_list)
 	{
 		process = process_list->content;
