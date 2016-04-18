@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:42:28 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:37:23 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct			s_prompt
 
 }						t_prompt;
 
+void					prompt_error();
 char					*autocompletion(char *search);
 void					free_char(void *content, size_t size);
 int						tputs_putchar(int c);
