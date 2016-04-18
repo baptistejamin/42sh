@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 22:04:24 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:46:34 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_builtin	*builtins_get(void)
 		{"read", builtin_read},
 		{"jobs", builtin_jobs},
 		{"fg", builtin_fg},
+		{"bg", builtin_bg},
 		{NULL, builtin_exit}
 	};
 
