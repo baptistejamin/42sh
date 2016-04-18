@@ -6,16 +6,41 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/16 00:20:31 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 12:15:53 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <executor.h>
 #include <unistd.h>
-#include <stdio.h>
-#include <sys/errno.h>
-void	launch_job(t_job *j, int foreground)
+
+
+void			exec_job_list(t_list *job_list)
+{
+	t_job	*j;
+
+	while (job_list) {
+		j = job_list->content;
+		prepare_job(j);
+		if (j->linker != LINK_TO_BACKGROUND)
+			launch_job(job_list->content, 1);
+		else
+			launch_job(job_list->content, 0);
+		if (is_job_success(j) && j->linker == LINK_OR)
+		{
+			while (job_list->next && ((t_job *)job_list->content)->linker == LINK_OR)
+				job_list = job_list->next;
+		}
+		else if (!is_job_success(j) && j->linker == LINK_AND)
+		{
+			while (job_list->next && ((t_job *)job_list->content)->linker == LINK_AND)
+				job_list = job_list->next;
+		}
+		job_list = job_list->next;	
+	}
+}
+
+void			launch_job(t_job *j, int foreground)
 {
 	t_list		*process_list;
 	t_process 	*process;
@@ -64,58 +89,4 @@ void	launch_job(t_job *j, int foreground)
 		put_job_in_foreground(j, 0);
 	else
 		put_job_in_background(j, 0);
-}
-
-void	put_job_in_background(t_job *j, int cont)
-{
-	(void)j;
-	(void)cont;
-	//Need to log new background task
-}
-
-void	put_job_in_foreground(t_job *j, int cont)
-{
-	t_sh	*shell;
-
-	shell = t_sh_recover();
-	tcsetpgrp(0, j->pgid);
-	if (cont)
-		kill (- j->pgid, SIGCONT);
-	wait_for_job(j);
-	tcsetpgrp(0, shell->pgid);
-	//Maybe restore default termcaps ?
-}
-
-void	wait_for_job(t_job *j)
-{
-	int		status;
-	pid_t	pid;
-
-	status = 0;
-	pid = 0;
-	while (!job_is_completed(j) )
-	{
-		pid = waitpid(- j->pgid, &status, WUNTRACED);
-		update_process_status(j, pid, status);
-		if (pid == -1)
-		{
-			printf("pid == -1\n");
-			break ;		//Hacky, this should not happend all the time :(
-		}
-		status = 0;
-	}
-}
-
-int		job_is_completed(t_job *j)
-{
-	t_list	*process;
-
-	process = j->process_list;
-	while (process)
-	{
-		if (!((t_process *)(process->content))->completed)
-			return (0);
-		process = process->next;
-	}
-	return (1);
 }

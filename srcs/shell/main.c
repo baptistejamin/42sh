@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 15:52:22 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:09:31 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int		shell(void)
 				launch_job(job_list->content, 1);
 				job_list = job_list->next;
 			}
+			exec_job_list(job_list);
 			free(input);
 		}
 	}
