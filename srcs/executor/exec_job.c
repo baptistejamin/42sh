@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 21:59:36 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 23:07:32 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,53 +43,55 @@ void			exec_job_list(t_list *job_list)
 	}
 }
 
+void			launch_job_process(t_job *job, t_process *process, int *iofile,
+								int foreground)
+{
+	if (is_builtin(process->argv))
+	{
+		process->stdio[0].fd = iofile[0];
+		process->stdio[1].fd = iofile[1];
+		launch_process_builtin(process);
+	}
+	else if ((process->pid = fork()) == 0)
+	{
+		if (iofile[0] != 0)
+			process->stdio[0].fd = iofile[0];
+		if (iofile[1] != 1)
+			process->stdio[1].fd = iofile[1];
+		launch_process(process, job->pgid, foreground);
+	}
+	if (!job->pgid)
+		job->pgid = process->pid;
+	setpgid(process->pid, job->pgid);
+	if (iofile[0] != 0)
+		close (iofile[0]);
+	if (iofile[1] != 1)
+		close (iofile[1]);
+
+}
+
 void			launch_job(t_job *j, int foreground)
 {
 	t_list		*process_list;
 	t_process 	*process;
-	int			infile;
-	int			outfile;
+	int			iofile[2];
 	int			pipe_fd[2];
-	pid_t		child_pid;
 
 	process_list = j->process_list;
-	infile = 0;
-	child_pid = 0;
+	iofile[0] = 0;
 	while (process_list)
 	{
 		process = process_list->content;
 		if (process_list->next)
 		{
-			pipe(pipe_fd); //Handle pipe errors?
-			outfile = pipe_fd[1];
+			pipe(pipe_fd);
+			iofile[1] = pipe_fd[1];
 		}
 		else
-			outfile = 1;
-		if (is_builtin(process->argv))
-		{
-			process->stdio[0].fd = infile;
-			process->stdio[1].fd = outfile;
-			launch_process_builtin(process);
-		}
-		else if ((child_pid = fork()) == 0) //Handle fork errors?
-		{
-			if (infile != 0)
-				process->stdio[0].fd = infile;
-			if (outfile != 1)
-				process->stdio[1].fd = outfile;
-			launch_process(process, j->pgid, foreground);
-		}
-		process->pid = child_pid;
-		if (!j->pgid)
-			j->pgid = child_pid;
-		setpgid(child_pid, j->pgid);
+			iofile[1] = 1;
+		launch_job_process(j, process, iofile, foreground);
+		iofile[0] = pipe_fd[0];
 		process_list = process_list->next;
-
-		if (infile != 0)
-			close (infile);
-		if (outfile != 1)
-			close (outfile);
-		infile = pipe_fd[0];
 	}
 	if (foreground)
 		put_job_in_foreground(j, 0);
