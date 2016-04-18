@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/12 16:31:10 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 15:55:40 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int			builtin_exit(t_list *environ, char **cmds)
 		if (assert_digit(cmds[1]) && !cmds[2])
 		{
 			sh->last_res = ft_atoi(cmds[1]);
-			//todo exit
-			//shell_exit();
+			shell_exit();
 			return (ft_atoi(cmds[1]));
 		}
 		else
@@ -54,9 +53,7 @@ int			builtin_exit(t_list *environ, char **cmds)
 			return (2);
 		}
 	}
-	else{
-		//todo exit
-		//shell_exit();
-	}
+	else
+		shell_exit();
 	return (sh->last_res);
 }

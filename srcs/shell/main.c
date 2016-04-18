@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/16 00:17:40 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 15:52:22 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static int		shell(void)
 			prompt_add_new();
 		prompt_display(1);
 		input = prompt_input();
+		is_last_cmd_empty = ft_isempty(input);
 		if (input)
 		{
 			prompt_reset();
-			if (ft_strcmp("exit", input) == 0)
-				exit(0); //TMP
 			token_list = input_to_token_list(input);
 			job_list = token_list_to_job_list(token_list);
-			while (job_list) {
+			while (job_list)
+			{
 				prepare_job(job_list->content);
 				launch_job(job_list->content, 1);
 				job_list = job_list->next;

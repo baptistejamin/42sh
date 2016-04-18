@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:43:29 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:04:11 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			prompt_display(int show_cursor)
 	tputs(tgetstr("vi", NULL), 0, tputs_putchar);
 	prompt_update_cursor_to_start(sh);
 	tputs(tgetstr("cd", NULL), 0, tputs_putchar);
-	ft_putstr_fd("21sh $>", sh->tty);
+	ft_putstr_fd("42sh $>", sh->tty);
 	printed_chars = prompt_get_lenght();
 	char_list = sh->c_prompt->chars;
 	i = 0;
