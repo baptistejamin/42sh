@@ -6,13 +6,13 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:18:57 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:20:06 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
 #include <shell.h>
-#include <stdio.h>
+
 void	put_job_in_background(t_job *j, int cont)
 {
 	t_sh	*shell;
