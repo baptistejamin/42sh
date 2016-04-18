@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:38:55 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 16:57:22 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				main(int argc, char **argv, char **environ)
 
 	UNUSED(argv);
 	sh = t_sh_recover();
+	sh->vars_list = NULL;
 	sh->tty = open("/dev/tty", O_RDWR);
 	sh->pgid = getpgrp();
 	ignore_major_signals();

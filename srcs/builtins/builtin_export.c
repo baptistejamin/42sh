@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 19:32:26 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:38:35 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static int	builtin_env_set_vars_error(void)
+static int	builtin_export_set_vars_error(void)
 {
 	ft_putendl_fd("Your variables must be alphanumeric", 2);
 	return (-1);
 }
 
-static int	builtin_env_set_vars(t_generic_options *options,
-											t_list **list, char **cmds)
+static int	builtin_export_set_vars(t_generic_options *options, char **cmds)
 {
 	int		i;
 	char	*var;
 	char	*value;
+	t_sh	*sh;
 
+	sh = t_sh_recover();
 	i = options->start;
 	while (cmds[i])
 	{
@@ -36,10 +37,8 @@ static int	builtin_env_set_vars(t_generic_options *options,
 			ft_strlen(ft_strchr(cmds[i], '=')));
 			value = ft_strdup(ft_strchr(cmds[i], '=') + 1);
 			if (ft_strchr(value, '='))
-				return (builtin_env_set_vars_error());
-			env_set(list, var, value);
-			free(var);
-			free(value);
+				return (builtin_export_set_vars_error());
+			env_set(&sh->vars_list, var, value);
 		}
 		else
 			return (i);
@@ -48,44 +47,23 @@ static int	builtin_env_set_vars(t_generic_options *options,
 	return (i);
 }
 
-static void	ft_envcpy(t_list **dest, t_list *src)
-{
-	t_env	new_env;
-	t_env	*env;
-
-	while (src)
-	{
-		env = src->content;
-		new_env.var = ft_strdup(env->var);
-		new_env.value = ft_strdup(env->value);
-		ft_lstadd(dest, ft_lstnew(&new_env, src->content_size));
-		src = src->next;
-	}
-}
-
-int			builtin_env(t_list *environ, char **cmds)
+int			builtin_export(t_list *environ, char **cmds)
 {
 	t_generic_options	options;
-	t_list				*new_env;
-	int					cmd_index;
+	t_sh				*sh;
 
-	options = builtin_options_parser(cmds, "i");
+	UNUSED(environ);
+	sh = t_sh_recover();
+	options = builtin_options_parser(cmds, "p");
 	if (options.error)
 	{
-		ft_putstr_fd("env: illegal option -- ", 2);
+		ft_putstr_fd("export: illegal option -- ", 2);
 		ft_putchar_fd(options.error_char, 2);
 		ft_putstr_fd("\n", 2);
 		return (1);
 	}
-	new_env = NULL;
-	if (!ft_is_in(options.options, 'i'))
-		ft_envcpy(&new_env, environ);
-	cmd_index = builtin_env_set_vars(&options, &new_env, cmds);
-	if (cmd_index != -1 && !cmds[cmd_index])
-		env_show(new_env);
-	else if (cmd_index != -1)
-		env_boot(new_env, &cmds[cmd_index]);
-	if (new_env)
-		ft_lstdel(&new_env, &builtin_unsetenv_free);
+	builtin_export_set_vars(&options, cmds);
+	if (ft_is_in(options.options, 'p'))
+		env_show(sh->vars_list);
 	return (0);
 }
