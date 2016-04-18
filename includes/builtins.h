@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:33:03 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/18 19:15:26 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int					env_launch_cmd(t_list *environ, char *cmd,
 void				errors_is_directory(char *cmd);
 void				errors_not_found(char *cmd);
 void				errors_no_file_directory(char *cmd);
+int					builtin_jobs(t_list *environ, char **av);
 
 #endif
