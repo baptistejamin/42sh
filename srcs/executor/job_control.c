@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:20:06 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/18 22:26:14 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,22 @@ void	put_job_in_background(t_job *j, int cont)
 
 void	put_job_in_foreground(t_job *j, int cont)
 {
-	t_sh	*shell;
+	t_sh		*shell;
+	t_list		*cur;
 
 	shell = t_sh_recover();
 	if (j->pgid > 0)
 		tcsetpgrp(0, j->pgid);
 	if (cont)
+	{
+		cur = j->process_list;
+		while (cur)
+		{
+			((t_process *)(cur->content))->stopped = 0;
+			cur = cur->next;
+		}
 		kill (- j->pgid, SIGCONT);
+	}
 	wait_for_job(j);
 	tcsetpgrp(0, shell->pgid);
 	//Maybe restore default termcaps ?
