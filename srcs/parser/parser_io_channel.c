@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser_io_channel.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 04:10:04 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:55:29 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:24:55 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 #include <unistd.h>
 
-static int 		parse_truncate_redir(t_process *p, int channel, char *target)
+static int	parse_truncate_redir(t_process *p, int channel, char *target)
 {
 	int		fd;
 
@@ -24,7 +24,7 @@ static int 		parse_truncate_redir(t_process *p, int channel, char *target)
 	return (0);
 }
 
-static int 		parse_append_redir(t_process *p, int channel, char *target)
+static int	parse_append_redir(t_process *p, int channel, char *target)
 {
 	int		fd;
 
@@ -57,7 +57,6 @@ static int	parse_heredoc_redir(t_process *p, int channel, char *target)
 	p->stdio[channel].fd = pipe_fd[0];
 	p->stdio[channel].to_close = 1;
 	close(pipe_fd[1]);
-	
 	return (0);
 }
 
@@ -78,7 +77,6 @@ static int	parse_input_redir(t_process *p, int channel, char *target)
 
 int			parse_io_channel(t_process *p, char **split)
 {
-	
 	if (is_aggregate_fd(*split))
 		return (aggreagate_fd(p, *split));
 	if (is_token_redir_append_output(*split))

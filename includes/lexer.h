@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/14 17:03:29 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:11:47 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LEXER_H
 # include <stdlib.h>
 # include <libft.h>
-
 
 typedef enum		e_token_type
 {

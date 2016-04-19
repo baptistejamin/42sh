@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_io_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:14:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 17:04:00 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:25:21 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		count_target_length(t_process *p, char **split, char symbol,
 		parse_fn(p, channel, *(split + 1));
 		return (2);
 	}
-
 }
 
 int		is_aggregate_fd(char *redir)

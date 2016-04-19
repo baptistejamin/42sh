@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 16:46:27 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:19:50 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_job_in_background(t_job *j, int cont)
 
 	shell = t_sh_recover();
 	if (cont)
-		kill (- j->pgid, SIGCONT);
+		kill(-j->pgid, SIGCONT);
 	ft_lstadd_back(&(shell->jobs), ft_lstnew(j, sizeof(t_job)));
 	put_job_info(j, find_job_index(j->pgid));
 }
@@ -40,7 +40,7 @@ void	put_job_in_foreground(t_job *j, int cont)
 			((t_process *)(cur->content))->stopped = 0;
 			cur = cur->next;
 		}
-		kill (- j->pgid, SIGCONT);
+		kill(-j->pgid, SIGCONT);
 	}
 	wait_for_job(j);
 	tcsetpgrp(0, shell->pgid);
@@ -55,7 +55,7 @@ void	wait_for_job(t_job *j)
 	pid = 0;
 	while (!job_is_completed(j) && !job_is_stopped(j))
 	{
-		pid = waitpid(- j->pgid, &status, WUNTRACED);
+		pid = waitpid(-j->pgid, &status, WUNTRACED);
 		update_process_status(j, pid, status);
 		if (pid == -1)
 			break ;
@@ -65,7 +65,7 @@ void	wait_for_job(t_job *j)
 
 int		job_is_completed(t_job *j)
 {
-	t_list	*process;
+	t_list		*process;
 	t_process	*p;
 
 	process = j->process_list;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_notification.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 16:12:19 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:13:02 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:20:43 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void		put_job_info(t_job *j, int index)
 		ft_putendl("(unknown command)");
 }
 
-int			update_process_status_by_pid(t_list *process_list, pid_t pid, int status)
+int			update_process_status_by_pid(t_list *process_list,
+				pid_t pid, int status)
 {
 	t_process	*p;
 
@@ -93,7 +94,7 @@ static void	notify_terminated_jobs(t_list *job_list)
 		}
 		i++;
 		job_list = job_list->next;
-	}	
+	}
 }
 
 void		update_job_status(void)

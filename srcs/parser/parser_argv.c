@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:54:26 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:22:44 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char		*get_new_arg(char *arg)
 	char		*res;
 
 	res = ft_strdup(arg);
-	return (res); //need to escape quotes
+	return (res);
 }
 
 char			*construct_job_command(t_list *process_list)
@@ -81,7 +81,8 @@ char			**parse_cmd_argv(t_process *p, char *cmd)
 	int		i;
 
 	i = 0;
-	if (!(argv = malloc(sizeof(char *) * count_args(clear_str_space(cmd)) + 1)) ||
+	clear_str_space(cmd);
+	if (!(argv = malloc(sizeof(char *) * count_args(cmd) + 1)) ||
 		!(split = ft_strsplit(cmd, ' ')))
 		return (NULL);
 	start_split = split;

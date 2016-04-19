@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 16:54:22 by nathan            #+#    #+#             */
-/*   Updated: 2016/04/18 19:21:27 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:20:17 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,4 @@ void			prepare_job(t_job *j)
 		find_path_binary(p->argv, path);
 		process_list = process_list->next;
 	}
-	//free(path);
 }

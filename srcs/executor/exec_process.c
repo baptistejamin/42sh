@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 17:06:39 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:18:44 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		launch_process(t_process *p, pid_t pgid, int foreground)
 	exit(1);
 }
 
-int		update_process_status(t_job *j, pid_t pid, int status)
+int			update_process_status(t_job *j, pid_t pid, int status)
 {
 	t_list	*process;
 

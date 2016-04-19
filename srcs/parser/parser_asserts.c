@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_asserts.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 00:31:17 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 04:27:52 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:21:26 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 
-int 		parser_assert_linker(t_token *t)
+int			parser_assert_linker(t_token *t)
 {
 	if (!t)
 		return (0);

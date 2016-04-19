@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:41:14 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 20:25:54 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
 
-void	prompt_error()
+void	prompt_error(void)
 {
-	//close("/dev/tty");
 	ft_putendl("Termcaps. Cannot launch 42sh. Did you set env vars?");
 	exit(1);
 }

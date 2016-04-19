@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_helpers_cd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:13:52 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/12 16:21:20 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 20:14:21 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	builtin_cd_update_path(t_list **environ,
 int		builtin_cd_change_directory(t_list **environ,
 												char *curpath, int is_physical)
 {
-	t_sh 		*sh;
+	t_sh		*sh;
 	t_stat		stat_;
 	char		old_path[PATH_MAX];
 	char		new_path[PATH_MAX];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:26 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 20:26:14 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 20:16:12 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <libft.h>
 # include <parser.h>
 # include <signal.h>
+# define GET_JOB_LINKER(x) ((t_job *)x->content)->linker
 
 void			exec_job_list(t_list *job_list);
 void			prepare_job(t_job *j);
