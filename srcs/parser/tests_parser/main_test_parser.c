@@ -64,4 +64,13 @@ int main(void)
 		debug_put_job(job_list->content);
 		job_list = job_list->next;
 	}
+	cmd = "ls includes uriewo >lsout 2>lserr && ls includes uriewu >lsout 2>&1";
+	printf("\nTesting: %s\n", cmd);
+	token_list = input_to_token_list(cmd);
+	job_list = token_list_to_job_list(token_list);
+	while (job_list){
+		debug_put_job(job_list->content);
+		job_list = job_list->next;
+	}
+
 }

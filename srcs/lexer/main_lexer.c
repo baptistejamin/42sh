@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:52:31 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/13 22:19:40 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 16:33:11 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ t_list			*input_to_token_list(char *input)
 			i += 2;
 		if (input[i] == '\'' || input[i] == '"')
 			i += lexer_skip_quotes(input + i);
+		i += is_token_redir(input + i);
 		if (is_token(input + i) || !input[i])
 		{
 			cmd_to_token(&token_list, input, i);
-			i += read_token(&token_list, input + i);
-			input += i;
+			input += i + read_token(&token_list, input + i);
 			i = 0;
 		}
 		else

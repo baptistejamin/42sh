@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:26:14 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 16:46:27 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	put_job_in_foreground(t_job *j, int cont)
 	}
 	wait_for_job(j);
 	tcsetpgrp(0, shell->pgid);
-	//Maybe restore default termcaps ?
 }
 
 void	wait_for_job(t_job *j)

@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:50:52 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 16:44:54 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct			s_io_channel
 {
 	int					fd;
 	char				to_close;
+	char				aggr;
+	char				dead_end;
 }						t_io_channel;
 
 typedef struct			s_process
