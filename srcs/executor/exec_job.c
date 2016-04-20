@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:48:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:18:21 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 14:18:11 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void			exec_job_list(t_list *job_list)
 			put_job_in_background(j, 0);
 		else if (is_job_success(j) && j->linker == LINK_OR)
 		{
-			while (job_list->next && GET_JOB_LINK(job_list) == LINK_OR)
+			while (job_list->next && GET_JOB_LINKER(job_list) == LINK_OR)
 				job_list = job_list->next;
 		}
 		else if (!is_job_success(j) && j->linker == LINK_AND)
 		{
-			while (job_list->next && GET_JOB_LINK(job_list) == LINK_AND)
+			while (job_list->next && GET_JOB_LINKER(job_list) == LINK_AND)
 				job_list = job_list->next;
 		}
 		job_list = job_list->next;

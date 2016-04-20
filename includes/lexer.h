@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:11:47 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 14:16:14 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int					is_token_redir_get_input(char *line);
 int					is_token_parent_open(char *line);
 int					is_token_parent_close(char *line);
 int					lexer_skip_quotes(char *input);
+int					check_lexer(t_list *token_list);
 
 #endif

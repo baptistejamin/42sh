@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/19 20:26:31 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 14:20:39 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,23 @@ static	void	prepare_env(void)
 		free(number);
 }
 
+static void		process_input(char *input)
+{
+	t_list	*token_list;
+	t_list	*job_list;
+	
+	token_list = input_to_token_list(input);
+	if (check_lexer(token_list) == 0)
+	{
+		job_list = token_list_to_job_list(token_list);
+		exec_job_list(job_list);
+	}
+}
+
 static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
-	t_list	*token_list;
-	t_list	*job_list;
 
 	is_last_cmd_empty = 0;
 	while (1)
@@ -59,9 +70,7 @@ static int		shell(void)
 		{
 			prompt_reset();
 			update_job_status();
-			token_list = input_to_token_list(input);
-			job_list = token_list_to_job_list(token_list);
-			exec_job_list(job_list);
+			process_input(input);
 			free(input);
 		}
 	}
