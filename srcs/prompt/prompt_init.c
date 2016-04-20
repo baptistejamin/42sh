@@ -42,13 +42,13 @@ int		prompt_init(void)
 	t_sh	*sh;
 
 	sh = t_sh_recover();
+	if (tcgetattr(0, &sh->default_term))
+		prompt_error();
 	if ((sh->term_name = getenv("TERM")) == NULL)
 		prompt_error();
 	if (tgetent(buff_env, sh->term_name) != 1)
 		prompt_error();
 	if (tcgetattr(0, &sh->term) == -1)
-		prompt_error();
-	if (tcgetattr(0, &sh->default_term))
 		prompt_error();
 	sh->signals_disabled = 0;
 	sh->term.c_lflag &= ~(ICANON | ECHO);
@@ -74,10 +74,8 @@ int		prompt_reset(void)
 	t_sh *sh;
 
 	sh = t_sh_recover();
-	sh->term.c_lflag = (ICANON | ECHO | ISIG);
-	sh->signals_disabled = 1;
-	if (tcsetattr(0, TCSANOW, &sh->term) == -1)
-		return (0);
 	tputs(tgetstr("ve", NULL), 1, tputs_putchar);
+	if (tcsetattr(0, TCSANOW, &sh->default_term) == -1)
+		return (0);
 	return (1);
 }

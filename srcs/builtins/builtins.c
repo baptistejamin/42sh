@@ -27,6 +27,7 @@ static t_builtin	*builtins_get(void)
 		{"read", builtin_read},
 		{"jobs", builtin_jobs},
 		{"fg", builtin_fg},
+		{"echo", builtin_echo},
 		{NULL, builtin_exit}
 	};
 

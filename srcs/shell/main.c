@@ -56,7 +56,9 @@ static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
+	t_sh  *sh;
 
+	sh = t_sh_recover();
 	is_last_cmd_empty = 0;
 	while (1)
 	{
@@ -71,6 +73,7 @@ static int		shell(void)
 			prompt_reset();
 			update_job_status();
 			process_input(input);
+			env_set(&sh->vars_list, "?", ft_itoa(sh->last_res));
 			free(input);
 		}
 	}

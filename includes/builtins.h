@@ -44,6 +44,7 @@ int					builtin_setenv(t_list *environ, char **cmds);
 int					builtin_unsetenv(t_list *environ, char **cmds);
 void				builtin_unsetenv_free(void *content, size_t content_size);
 int					builtin_fg(t_list *environ, char **cmds);
+int					builtin_echo(t_list *environ, char **cmds);
 int					is_builtin(char **cmds);
 int					boot_builtin(t_list *environ, char **cmds);
 int					boot_cmd(t_list *environ, char **cmds);
