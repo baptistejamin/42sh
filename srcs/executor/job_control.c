@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:19:50 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:59:17 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	put_job_in_foreground(t_job *j, int cont)
 		kill(-j->pgid, SIGCONT);
 	}
 	wait_for_job(j);
+	env_set(&shell->vars_list, "?", ft_itoa(get_job_exit_code(j)));
 	tcsetpgrp(0, shell->pgid);
 }
 

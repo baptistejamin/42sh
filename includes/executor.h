@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:26 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:16:12 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:59:00 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void			update_job_status_by_pid(t_list *job_list,
 					pid_t pid, int status);
 void			update_job_status(void);
 void			put_job_info(t_job *j, int index);
+int				get_job_exit_code(t_job *j);
 
 #endif

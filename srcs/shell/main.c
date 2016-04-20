@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/20 16:58:16 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:58:36 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
-	t_sh  *sh;
-
-	sh = t_sh_recover();
+	
 	is_last_cmd_empty = 0;
 	while (1)
 	{
@@ -73,7 +71,6 @@ static int		shell(void)
 			prompt_reset();
 			update_job_status();
 			process_input(input);
-			env_set(&sh->vars_list, "?", ft_itoa(sh->last_res));
 			free(input);
 		}
 	}
