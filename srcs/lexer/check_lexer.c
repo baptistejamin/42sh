@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:06:48 by nathan            #+#    #+#             */
-/*   Updated: 2016/04/20 14:16:01 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 16:32:44 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int				check_lexer(t_list *token_list)
 	t_token	*t_next;
 
 	t = NULL;
+	if (!token_list)
+		return (1);
 	while (token_list->next)
 	{
 		t = token_list->content;
