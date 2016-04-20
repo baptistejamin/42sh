@@ -6,11 +6,12 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:22:44 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:18:50 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
+#include <shell.h>
 
 static size_t	count_args(const char *s)
 {
@@ -45,8 +46,15 @@ static char		*clear_str_space(char *s)
 static char		*get_new_arg(char *arg)
 {
 	char		*res;
+	t_sh		*shell;
 
-	res = ft_strdup(arg);
+	if (!arg)
+		return (ft_strdup(""));
+	shell = t_sh_recover();
+	if (*arg == '$' && *(arg + 1))
+		res = env_get(shell->env_list, arg + 1);
+	else
+		res = ft_strdup(arg);
 	return (res);
 }
 
