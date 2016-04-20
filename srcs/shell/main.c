@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/20 14:20:39 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 16:58:16 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		process_input(char *input)
 {
 	t_list	*token_list;
 	t_list	*job_list;
-	
+
 	token_list = input_to_token_list(input);
 	if (check_lexer(token_list) == 0)
 	{

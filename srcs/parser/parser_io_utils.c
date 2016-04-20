@@ -6,7 +6,7 @@
 /*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 18:14:42 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:25:21 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/20 16:56:32 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ int		count_target_length(t_process *p, char **split, char symbol,
 		parse_fn(p, channel, ft_strrchr(*split, symbol) + 1);
 		return (1);
 	}
-	else
+	else if (*(split + 1))
 	{
 		parse_fn(p, channel, *(split + 1));
 		return (2);
 	}
+	return (1);
 }
 
 int		is_aggregate_fd(char *redir)
