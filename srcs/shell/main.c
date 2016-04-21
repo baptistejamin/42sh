@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/20 19:58:36 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/21 16:11:29 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
-	
+
 	is_last_cmd_empty = 0;
 	while (1)
 	{

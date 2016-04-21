@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 12:05:45 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/20 19:52:58 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/21 16:13:05 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int		get_job_exit_code(t_job *j)
 	t_list		*process_list;
 	t_process	*p;
 
-	process_list =  j->process_list;
+	process_list = j->process_list;
 	while (process_list)
 	{
-		p =	process_list->content;
+		p = process_list->content;
 		if (p->completed && p->status != 0)
 			return (p->status);
 		process_list = process_list->next;
