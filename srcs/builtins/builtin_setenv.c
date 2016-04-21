@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/12 16:27:25 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/19 20:13:32 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	builtin_setenv_error_two_many(void)
 	ft_putendl_fd("setenv: Two many arguments", 2);
 	return (2);
 }
+
 int			builtin_setenv(t_list *environ, char **cmds)
 {
 	t_sh	*sh;

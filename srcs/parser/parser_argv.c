@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:54:26 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/20 19:28:11 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
+#include <shell.h>
 
 static size_t	count_args(const char *s)
 {
@@ -45,9 +46,21 @@ static char		*clear_str_space(char *s)
 static char		*get_new_arg(char *arg)
 {
 	char		*res;
+	t_sh		*shell;
 
-	res = ft_strdup(arg);
-	return (res); //need to escape quotes
+	res = NULL;
+	if (!arg)
+		return (ft_strdup(""));
+	shell = t_sh_recover();
+	if (*arg == '$' && *(arg + 1))
+	{
+		res = env_get(shell->env_list, arg + 1);
+		if (!res || (res && !*res))
+			res = env_get(shell->vars_list, arg + 1);
+	}
+	else
+		res = ft_strdup(arg);
+	return (res);
 }
 
 char			*construct_job_command(t_list *process_list)
@@ -81,7 +94,8 @@ char			**parse_cmd_argv(t_process *p, char *cmd)
 	int		i;
 
 	i = 0;
-	if (!(argv = malloc(sizeof(char *) * count_args(clear_str_space(cmd)) + 1)) ||
+	clear_str_space(cmd);
+	if (!(argv = malloc(sizeof(char *) * count_args(cmd) + 1)) ||
 		!(split = ft_strsplit(cmd, ' ')))
 		return (NULL);
 	start_split = split;

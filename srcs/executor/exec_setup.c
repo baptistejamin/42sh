@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 16:54:22 by nathan            #+#    #+#             */
-/*   Updated: 2016/04/18 19:21:27 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:47:14 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <executor.h>
 #include <dirent.h>
 #include <builtins.h>
+
+static char		**default_command(void)
+{
+	char	**av;
+
+	av = malloc(sizeof(char *) * 2);
+	av[0] = ft_strdup("cat");
+	av[1] = NULL;
+	return (av);
+}
 
 static char		*path_join(char *s1, char *s2)
 {
@@ -89,9 +99,11 @@ void			prepare_job(t_job *j)
 	process_list = j->process_list;
 	while (process_list)
 	{
-		p = process_list->content;
+		if (!(p = process_list->content))
+			return ;
+		if (!p->argv || (p->argv && !*(p->argv)))
+			p->argv = default_command();
 		find_path_binary(p->argv, path);
 		process_list = process_list->next;
 	}
-	//free(path);
 }

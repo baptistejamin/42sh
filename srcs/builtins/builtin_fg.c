@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 22:15:13 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:12:58 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <executor.h>
 
-int		builtin_fg_default()
+int		builtin_fg_default(void)
 {
 	t_job	*job;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 15:22:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/14 17:03:29 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/20 14:16:14 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LEXER_H
 # include <stdlib.h>
 # include <libft.h>
-
 
 typedef enum		e_token_type
 {
@@ -74,5 +73,6 @@ int					is_token_redir_get_input(char *line);
 int					is_token_parent_open(char *line);
 int					is_token_parent_close(char *line);
 int					lexer_skip_quotes(char *input);
+int					check_lexer(t_list *token_list);
 
 #endif

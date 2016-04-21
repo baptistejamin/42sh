@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 22:26:14 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/20 19:59:17 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_job_in_background(t_job *j, int cont)
 
 	shell = t_sh_recover();
 	if (cont)
-		kill (- j->pgid, SIGCONT);
+		kill(-j->pgid, SIGCONT);
 	ft_lstadd_back(&(shell->jobs), ft_lstnew(j, sizeof(t_job)));
 	put_job_info(j, find_job_index(j->pgid));
 }
@@ -40,11 +40,11 @@ void	put_job_in_foreground(t_job *j, int cont)
 			((t_process *)(cur->content))->stopped = 0;
 			cur = cur->next;
 		}
-		kill (- j->pgid, SIGCONT);
+		kill(-j->pgid, SIGCONT);
 	}
 	wait_for_job(j);
+	env_set(&shell->vars_list, "?", ft_itoa(get_job_exit_code(j)));
 	tcsetpgrp(0, shell->pgid);
-	//Maybe restore default termcaps ?
 }
 
 void	wait_for_job(t_job *j)
@@ -56,7 +56,7 @@ void	wait_for_job(t_job *j)
 	pid = 0;
 	while (!job_is_completed(j) && !job_is_stopped(j))
 	{
-		pid = waitpid(- j->pgid, &status, WUNTRACED);
+		pid = waitpid(-j->pgid, &status, WUNTRACED);
 		update_process_status(j, pid, status);
 		if (pid == -1)
 			break ;
@@ -66,7 +66,7 @@ void	wait_for_job(t_job *j)
 
 int		job_is_completed(t_job *j)
 {
-	t_list	*process;
+	t_list		*process;
 	t_process	*p;
 
 	process = j->process_list;

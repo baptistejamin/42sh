@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 18:13:21 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:18:44 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,17 @@ void		launch_process_builtin(t_process *p)
 static void	get_new_stdio(t_process *p, t_io_channel *s)
 {
 	if (s[0].fd != 0)
-	{
 		dup2(p->stdio[0].fd, 0);
-		close(p->stdio[0].fd);
-	}
 	if (s[1].fd != 1)
-	{
 		dup2(p->stdio[1].fd, 1);
-		close(p->stdio[1].fd);
-	}
 	if (s[2].fd != 2)
-	{
 		dup2(p->stdio[2].fd, 2);
-		close(p->stdio[2].fd);
-	}
+	if (s[0].dead_end)
+		close(0);
+	if (s[1].dead_end)
+		close(1);
+	if (s[2].dead_end)
+		close(2);
 }
 
 void		launch_process(t_process *p, pid_t pgid, int foreground)
@@ -66,7 +63,7 @@ void		launch_process(t_process *p, pid_t pgid, int foreground)
 	exit(1);
 }
 
-int		update_process_status(t_job *j, pid_t pid, int status)
+int			update_process_status(t_job *j, pid_t pid, int status)
 {
 	t_list	*process;
 

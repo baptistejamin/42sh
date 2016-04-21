@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:07 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:45:16 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:23:23 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-#include <stdio.h>
+
 t_list					*token_list_to_job_list(t_list *token_list)
 {
 	t_list		*job_list;

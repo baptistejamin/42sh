@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 19:50:52 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/19 20:12:24 by nathan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct			s_io_channel
 {
 	int					fd;
 	char				to_close;
+	char				aggr;
+	char				dead_end;
 }						t_io_channel;
 
 typedef struct			s_process
@@ -56,7 +58,7 @@ t_list					*token_list_to_job_list(t_list *token_list);
 t_list					*parse_job(t_list *token_split);
 t_list					*parse_process(t_token *t);
 
-int 					parser_assert_linker(t_token *t);
+int						parser_assert_linker(t_token *t);
 int						parser_assert_pipe(t_token *t);
 int						parser_assert_cmd(t_token *t);
 
