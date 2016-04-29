@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 12:05:45 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/29 17:39:29 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:42:52 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		get_job_exit_code(t_job *j)
 		{
 			if (WIFEXITED(p->status))
 				return (WEXITSTATUS(p->status));
+			else if (WIFSIGNALED(p->status))
+				return (128 + WTERMSIG(p->status));
 			else
 				return (p->status);
 		}
