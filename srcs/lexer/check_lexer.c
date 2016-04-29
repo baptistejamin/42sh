@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 14:06:48 by nathan            #+#    #+#             */
-/*   Updated: 2016/04/29 18:13:09 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/29 19:01:30 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void		check_lexer_error(char *token)
 	ft_putendl("`");
 }
 
-static int		check_lexer_single_bg(t_list * t_list)
+static int		check_lexer_single_bg(t_list *tok_list)
 {
 	t_token	*t;
 
-	if (!t_list)
+	if (!tok_list)
 		return (1);
-	t = t_list->content;
+	t = tok_list->content;
 	if (!t)
 		return (1);
 	if (t->type == TO_BACKGROUND)
