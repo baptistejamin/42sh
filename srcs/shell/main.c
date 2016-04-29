@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/21 16:11:29 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 16:34:34 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ static int		shell(void)
 		is_last_cmd_empty = ft_isempty(input);
 		if (input)
 		{
+			signal(SIGINT, SIG_IGN);
 			prompt_reset();
 			update_job_status();
 			process_input(input);
 			free(input);
+			ignore_major_signals();
 		}
 	}
 	return (0);
