@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_argv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 19:21:33 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/20 19:28:11 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 15:46:20 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,15 @@ static char		*clear_str_space(char *s)
 static char		*get_new_arg(char *arg)
 {
 	char		*res;
-	t_sh		*shell;
+	char		*env_var;
 
 	res = NULL;
+	env_var = NULL;
 	if (!arg)
 		return (ft_strdup(""));
-	shell = t_sh_recover();
-	if (*arg == '$' && *(arg + 1))
-	{
-		res = env_get(shell->env_list, arg + 1);
-		if (!res || (res && !*res))
-			res = env_get(shell->vars_list, arg + 1);
-	}
-	else
-		res = ft_strdup(arg);
+	res = ft_strdup(arg);
+	while ((env_var = ft_strchr(res, '$')) && env_var[1])
+		res = get_cmd_env(res, env_var);
 	return (res);
 }
 
