@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 18:56:53 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 19:47:59 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@ void		prompt_current_reset(void)
 
 void		prompt_add_command(int is_last_cmd_empty)
 {
-	t_sh *sh;
+	t_sh		*sh;
+	t_prompt	*prompt;
 
+	prompt = prompt_create_new();
 	sh = t_sh_recover();
 	if (!is_last_cmd_empty)
 	{
-		ft_lstadd(&sh->history, ft_lstnew(sh->c_prompt, sizeof(t_prompt)));
+		ft_lstcpy(&prompt->chars, sh->c_prompt->chars);
+		ft_lstrev(&prompt->chars);
+		prompt->lenght = sh->c_prompt->lenght;
+		prompt->cursor_index = prompt->lenght;
+		ft_lstadd(&sh->history, ft_lstnew(prompt, sizeof(t_prompt)));
 		sh->prompt_position--;
 	}
 }
