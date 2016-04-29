@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:43:00 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:45:27 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ enum e_prompt_status	prompt_move_right(char *buf)
 		return (TRYING);
 	if (sh->c_prompt->cursor_index < sh->c_prompt->lenght)
 	{
-		sh->c_prompt->cursor_index++;
-		if (sh->c_prompt->copy_mode)
+		if (sh->c_prompt->copy_mode &&
+			sh->c_prompt->cursor_index == sh->c_prompt->copy_end)
 			sh->c_prompt->copy_end++;
+		sh->c_prompt->cursor_index++;
 		prompt_display(1);
 	}
 	else
@@ -72,6 +73,9 @@ enum e_prompt_status	prompt_move_left(char *buf)
 		return (TRYING);
 	if (sh->c_prompt->cursor_index > 0)
 	{
+		if (sh->c_prompt->copy_mode &&
+			sh->c_prompt->cursor_index == sh->c_prompt->copy_start)
+			sh->c_prompt->copy_start--;
 		sh->c_prompt->cursor_index--;
 		prompt_display(1);
 	}
