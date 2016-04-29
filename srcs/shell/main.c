@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 17:46:57 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 18:03:00 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		process_input(char *input)
 	t_list	*job_list;
 
 	token_list = input_to_token_list(input);
+	update_job_status();
 	if (check_lexer(token_list) == 0)
 	{
 		job_list = token_list_to_job_list(token_list);
@@ -72,7 +73,6 @@ static int		shell(void)
 		{
 			signal(SIGINT, SIG_IGN);
 			prompt_reset();
-			update_job_status();
 			process_input(input);
 			free(input);
 			ignore_major_signals();
