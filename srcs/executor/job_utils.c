@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 17:38:10 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/18 21:54:14 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:39:46 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,28 @@ t_job		*find_job_by_index(int index)
 		i++;
 	}
 	return (NULL);
+}
+
+void		log_job_exit_signal(t_job *j)
+{
+	int		sig;
+	int		exit_code;
+
+	exit_code = get_job_raw_exit_code(j);
+	if (WIFSIGNALED(exit_code))
+	{
+		sig = WTERMSIG(exit_code);
+		if (sig == 10)
+		{
+			ft_putnbr(j->pgid);
+			ft_putstr("\tbus error\t");
+			ft_putendl(j->command);
+		}
+		if (sig == 11)
+		{
+			ft_putnbr(j->pgid);
+			ft_putstr("\tsegmentation fault\t");
+			ft_putendl(j->command);
+		}
+	}
 }

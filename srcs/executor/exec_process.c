@@ -6,7 +6,7 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/29 16:31:42 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:38:41 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ int			update_process_status(t_job *j, pid_t pid, int status)
 		{
 			if (WIFEXITED(status))
 			{
-				((t_process *)process->content)->status = WEXITSTATUS(status);
+				((t_process *)process->content)->status = status;
 				((t_process *)process->content)->completed = 1;
 			}
 			if (WIFSIGNALED(status))
 			{
-				((t_process *)process->content)->status = WTERMSIG(status);
+				((t_process *)process->content)->status = status;
 				((t_process *)process->content)->completed = 1;
 			}
 			if (WIFSTOPPED(status))
