@@ -6,13 +6,12 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 17:37:05 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:46:57 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
-#include <stdio.h>
 #include <lexer.h>
 #include <parser.h>
 #include <executor.h>
@@ -71,10 +70,12 @@ static int		shell(void)
 		is_last_cmd_empty = ft_isempty(input);
 		if (input)
 		{
+			signal(SIGINT, SIG_IGN);
 			prompt_reset();
 			update_job_status();
 			process_input(input);
 			free(input);
+			ignore_major_signals();
 		}
 	}
 	return (0);

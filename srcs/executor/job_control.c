@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   job_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 11:42:50 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/20 19:59:17 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:13:34 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	put_job_in_foreground(t_job *j, int cont)
 		kill(-j->pgid, SIGCONT);
 	}
 	wait_for_job(j);
+	log_job_exit_signal(j);
 	env_set(&shell->vars_list, "?", ft_itoa(get_job_exit_code(j)));
 	tcsetpgrp(0, shell->pgid);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:26 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/20 19:59:00 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:24:18 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void			update_job_status_by_pid(t_list *job_list,
 void			update_job_status(void);
 void			put_job_info(t_job *j, int index);
 int				get_job_exit_code(t_job *j);
+int				get_job_raw_exit_code(t_job *j);
+void			log_job_exit_signal(t_job *j);
 
 #endif

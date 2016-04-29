@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:24:02 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:18:44 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:38:41 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <executor.h>
 #include <builtins.h>
-
-void		launch_process_builtin(t_process *p)
-{
-	t_sh	*shell;
-
-	shell = t_sh_recover();
-	p->status = boot_builtin(shell->env_list, p->argv);
-	p->completed = 1;
-}
 
 static void	get_new_stdio(t_process *p, t_io_channel *s)
 {
@@ -37,6 +28,23 @@ static void	get_new_stdio(t_process *p, t_io_channel *s)
 		close(1);
 	if (s[2].dead_end)
 		close(2);
+}
+
+void		launch_process_builtin(t_process *p)
+{
+	t_sh	*shell;
+	int		save_stdio[3];
+
+	save_stdio[0] = dup(0);
+	save_stdio[1] = dup(1);
+	save_stdio[2] = dup(2);
+	shell = t_sh_recover();
+	get_new_stdio(p, p->stdio);
+	p->status = boot_builtin(shell->env_list, p->argv);
+	p->completed = 1;
+	dup2(save_stdio[0], 0);
+	dup2(save_stdio[1], 1);
+	dup2(save_stdio[2], 2);
 }
 
 void		launch_process(t_process *p, pid_t pgid, int foreground)
@@ -74,12 +82,12 @@ int			update_process_status(t_job *j, pid_t pid, int status)
 		{
 			if (WIFEXITED(status))
 			{
-				((t_process *)process->content)->status = WEXITSTATUS(status);
+				((t_process *)process->content)->status = status;
 				((t_process *)process->content)->completed = 1;
 			}
 			if (WIFSIGNALED(status))
 			{
-				((t_process *)process->content)->status = WTERMSIG(status);
+				((t_process *)process->content)->status = status;
 				((t_process *)process->content)->completed = 1;
 			}
 			if (WIFSTOPPED(status))
