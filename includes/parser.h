@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 23:49:18 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:12:24 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 15:37:45 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int						count_target_length(t_process *p, char **sp,
 void					del_job(void *job_raw, size_t job_size);
 void					del_process(void *raw_process, size_t process_size);
 char					*construct_job_command(t_list *process_list);
+char					*get_cmd_env(char *cmd, char *var_raw);
 
 #endif
