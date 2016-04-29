@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 15:42:18 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:37:05 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ static int		shell(void)
 {
 	char	*input;
 	int		is_last_cmd_empty;
+	t_sh	*sh;
 
 	is_last_cmd_empty = 0;
+	sh = t_sh_recover();
+	sh->c_prompt = prompt_create_new();
 	while (1)
 	{
 		prompt_init();
-		if (!is_last_cmd_empty)
-			prompt_add_new();
+		prompt_add_command(is_last_cmd_empty);
+		prompt_current_reset();
 		prompt_display(1);
 		input = prompt_input();
 		is_last_cmd_empty = ft_isempty(input);

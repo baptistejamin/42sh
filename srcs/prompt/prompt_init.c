@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/19 20:25:54 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:01:17 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@ void	prompt_error(void)
 {
 	ft_putendl("Termcaps. Cannot launch 42sh. Did you set env vars?");
 	exit(1);
-}
-
-void	prompt_add_new(void)
-{
-	t_sh		*sh;
-	t_prompt	prompt;
-
-	sh = t_sh_recover();
-	prompt.chars = NULL;
-	prompt.cursor_index = 0;
-	prompt.copy_mode = 0;
-	prompt.copy_start = 0;
-	prompt.copy_end = 0;
-	prompt.copy_word = NULL;
-	prompt.lenght = 0;
-	ft_lstadd(&sh->history, ft_lstnew(&prompt, sizeof(t_prompt)));
-	sh->c_prompt = sh->history->content;
 }
 
 int		prompt_init(void)

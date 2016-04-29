@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/09 18:24:29 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 16:37:23 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:33:56 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int						tputs_putchar(int c);
 void					prompt_display(int show_cursor);
 int						prompt_init(void);
 int						prompt_reset(void);
+void					prompt_add_command(int last_command);
 int						prompt_update_window(void);
-void					prompt_add_new(void);
+t_prompt				*prompt_create_new(void);
+void					prompt_current_reset(void);
 char					*prompt_input(void);
 char					*prompt_get_command(
 	t_prompt *prompt, size_t start, size_t end);

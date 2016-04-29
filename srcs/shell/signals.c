@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nathan <nathan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 18:32:25 by ngrasset          #+#    #+#             */
-/*   Updated: 2016/04/19 20:26:20 by nathan           ###   ########.fr       */
+/*   Updated: 2016/04/29 17:05:23 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		signal_reprompt(int i)
 {
 	UNUSED(i);
 	prompt_display(0);
-	prompt_add_new();
+	prompt_current_reset();
 	ft_putstr("\n");
 	prompt_display(1);
 }
