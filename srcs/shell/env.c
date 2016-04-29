@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/11 20:17:36 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 16:17:54 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*env_get(t_list *list, char *var)
 void	env_set(t_list **list, char *var, char *value)
 {
 	t_env	*env;
+	t_env	new_env;
 	t_list	*cur;
 
 	cur = *list;
@@ -39,16 +40,14 @@ void	env_set(t_list **list, char *var, char *value)
 		env = cur->content;
 		if (ft_strcmp(var, env->var) == 0)
 		{
-			env->value = value;
+			env->value = ft_strdup(value);
 			return ;
 		}
 		cur = cur->next;
 	}
-	env = malloc(sizeof(t_env));
-	env->var = var;
-	env->value = value;
-	ft_lstadd(list, ft_lstnew(env, sizeof(t_env)));
-	free(env);
+	new_env.var = ft_strdup(var);
+	new_env.value = ft_strdup(value);
+	ft_lstadd(list, ft_lstnew(&new_env, sizeof(t_env)));
 }
 
 void	env_show(t_list *list)

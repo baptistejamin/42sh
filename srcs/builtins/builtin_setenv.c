@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 15:08:56 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 15:46:14 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			builtin_setenv(t_list *environ, char **cmds)
 	if (cmds[2] && cmds[3])
 		return (builtin_setenv_error_two_many());
 	if (ft_strchr(cmds[1], '=') || (cmds[2] && ft_strchr(cmds[2], '=')))
+		return (builtin_setenv_error_missing());
+	if (!ft_str_alnum(cmds[1]))
 		return (builtin_setenv_error_missing());
 	val = cmds[2];
 	if (!val)

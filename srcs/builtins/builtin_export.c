@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/18 19:38:35 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 16:20:40 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	builtin_export_set_vars(t_generic_options *options, char **cmds)
 			ft_strncpy(var, cmds[i], ft_strlen(cmds[i]) -
 			ft_strlen(ft_strchr(cmds[i], '=')));
 			value = ft_strdup(ft_strchr(cmds[i], '=') + 1);
-			if (ft_strchr(value, '='))
+			if (ft_strchr(value, '=') || !ft_str_alnum(var))
 				return (builtin_export_set_vars_error());
 			env_set(&sh->vars_list, var, value);
 		}

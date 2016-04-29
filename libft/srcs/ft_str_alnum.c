@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_alnum.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:07:27 by bjamin            #+#    #+#             */
-/*   Updated: 2015/12/04 11:06:05 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 15:34:23 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_str_alnum(char *str)
 {
 	while (str && *str)
 	{
-		if (!ft_isalnum(*str))
+		if (!ft_isalnum(*str) || (*str != '_'))
 			return (0);
 		str++;
 	}

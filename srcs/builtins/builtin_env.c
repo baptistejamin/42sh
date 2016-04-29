@@ -6,7 +6,7 @@
 /*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 15:07:06 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/29 16:19:37 by bjamin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	builtin_env_set_vars(t_generic_options *options,
 			ft_strncpy(var, cmds[i], ft_strlen(cmds[i]) -
 			ft_strlen(ft_strchr(cmds[i], '=')));
 			value = ft_strdup(ft_strchr(cmds[i], '=') + 1);
-			if (ft_strchr(value, '='))
+			if (ft_strchr(value, '=') || !ft_str_alnum(var))
 				return (builtin_env_set_vars_error());
 			env_set(list, var, value);
 			free(var);
@@ -85,5 +85,7 @@ int			builtin_env(t_list *environ, char **cmds)
 		env_show(new_env);
 	else if (cmd_index != -1)
 		env_boot(new_env, &cmds[cmd_index]);
+	if (new_env)
+		ft_lstdel(&new_env, &builtin_unsetenv_free);
 	return (0);
 }
