@@ -6,13 +6,12 @@
 /*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/29 16:34:34 by ngrasset         ###   ########.fr       */
+/*   Updated: 2016/04/29 17:44:51 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <prompt.h>
-#include <stdio.h>
 #include <lexer.h>
 #include <parser.h>
 #include <executor.h>
