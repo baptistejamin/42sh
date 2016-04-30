@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_read.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjamin <bjamin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ngrasset <ngrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 14:06:11 by bjamin            #+#    #+#             */
-/*   Updated: 2016/04/30 16:34:09 by bjamin           ###   ########.fr       */
+/*   Updated: 2016/04/30 16:49:27 by ngrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+static void		unescape_string(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\')
+		{
+			ft_memmove(str + i, str + i + 1, ft_strlen(str + i));
+			if (str[i] == ' ' || str[i] == '\n')
+				ft_memmove(str + i, str + i + 1, ft_strlen(str + i));
+		}
+		i++;
+	}
+}
 
 static int		builtin_read_r(char **cmds, int start)
 {
@@ -44,13 +61,12 @@ static int		builtin_read_generic(char **cmds, int start)
 	should_repeat = 1;
 	while (should_repeat && get_next_line(0, &line))
 	{
-		if (line && ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\\')
-		{
-			line[ft_strlen(line) - 1] = 0;
+		if (line && ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\\' &&
+			(ft_strlen(line) == 1 || line[ft_strlen(line) - 2] != '\\'))
 			should_repeat = 1;
-		}
 		else
 			should_repeat = 0;
+		unescape_string(line);
 		str = ft_strfjoin(str, line);
 	}
 	env_set(&sh->vars_list, cmds[i], str);
